@@ -12,17 +12,17 @@ public class CustomerDAOImpl implements CustomerDAO{
     @PersistenceContext
     private EntityManager entityManager;
     @Override
-    public List<Customer> getAllCustomers() {
+    public List getAllCustomers() {
 
         Query query = entityManager.createQuery("from Customer ");
-        List<Customer> allCustomers = query.getResultList();
+        List allCustomers = query.getResultList();
         return allCustomers;
     }
 
     @Override
     public void saveCustomer(Customer customer) {
         Customer newCustomer = entityManager.merge(customer);
-        customer.setRegistrationCode(newCustomer.getRegistrationCode());
+        customer.setRegistration_code(newCustomer.getRegistration_code());
 
     }
 

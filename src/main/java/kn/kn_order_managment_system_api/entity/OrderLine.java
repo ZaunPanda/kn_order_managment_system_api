@@ -3,11 +3,11 @@ package kn.kn_order_managment_system_api.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "OrderLines")
+@Table(name = "order_lines")
 public class OrderLine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "orderLine_id")
+    @Column(name = "orderline_id")
     private int orderLine_id;
     @ManyToOne
     @JoinColumn(name = "order_id")

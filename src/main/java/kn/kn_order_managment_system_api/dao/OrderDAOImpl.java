@@ -34,20 +34,24 @@ public class OrderDAOImpl implements OrderDAO{
 
     @Override
     public List<Order> getAllOrdersByDate(Date date) {
-        Query query = entityManager.createQuery("from Order where submission_date=:date ");
+        Query query = entityManager.createQuery("from Order where submission_date=:date");
+        query.setParameter("date", date.toString());
         List<Order> allOrdersByDate= query.getResultList();
         return allOrdersByDate;
     }
 
     @Override
     public List<Order> getAllOrdersByProduct(Product product) {
-        //TODO
-        return null;
+        Query query = entityManager.createQuery("SELECT order_id FROM OrderLine WHERE product_id = :product");
+        query.setParameter("product", product);
+        List<Order> allOrdersByProduct = query.getResultList();
+
+        return allOrdersByProduct;
     }
 
     @Override
     public List<Order> getAllOrdersByCustomer(Customer customer) {
-        int customerId = customer.getRegistrationCode();
+        int customerId = customer.getRegistration_code();
         Query query = entityManager.createQuery("from Order where customer_id=:customerId");
         List<Order> allOrdersByDate= query.getResultList();
         return null;

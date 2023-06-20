@@ -8,10 +8,10 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "registrationCode")
-    private int registrationCode;
-    @Column(name = "fullName")
-    private String fullName;
+    @Column(name = "registration_code")
+    private int registration_code;
+    @Column(name = "full_name")
+    private String full_name;
     @Column(name = "email")
     private String email;
     @Column(name = "telephone")
@@ -20,26 +20,26 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String fullName, String email, String telephone) {
-        this.fullName = fullName;
+    public Customer(String full_name, String email, String telephone) {
+        this.full_name = full_name;
         this.email = email;
         this.telephone = telephone;
     }
 
-    public int getRegistrationCode() {
-        return registrationCode;
+    public int getRegistration_code() {
+        return registration_code;
     }
 
-    public void setRegistrationCode(int registrationCode) {
-        this.registrationCode = registrationCode;
+    public void setRegistration_code(int registration_code) {
+        this.registration_code = registration_code;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getFull_name() {
+        return full_name;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setFull_name(String full_name) {
+        this.full_name = full_name;
     }
 
     public String getEmail() {

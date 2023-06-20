@@ -1,7 +1,7 @@
 CREATE TABLE customers
 (
-    `registrationCode` INT PRIMARY KEY AUTO_INCREMENT,
-    `fullName`         VARCHAR(255),
+    `registration_code` INT PRIMARY KEY AUTO_INCREMENT,
+    `full_name`         VARCHAR(255),
     `email`            VARCHAR(255),
     `telephone`        VARCHAR(20)
 );
@@ -11,7 +11,7 @@ CREATE TABLE orders
     `order_id`        INT PRIMARY KEY AUTO_INCREMENT,
     `customer_id`     INT,
     `submission_date` DATE,
-    FOREIGN KEY (`customer_id`) REFERENCES `customers` (`registrationCode`)
+    FOREIGN KEY (`customer_id`) REFERENCES `customers` (`registration_code`)
 );
 
 
@@ -19,7 +19,9 @@ CREATE TABLE orders
 CREATE TABLE products
 (
     `product_id`   INT PRIMARY KEY AUTO_INCREMENT,
-    `product_name` VARCHAR(255)
+    `product_name` VARCHAR(255),
+    `sku_code` varchar(255),
+    `unit_price` INT
 );
 
 CREATE TABLE orderLines
