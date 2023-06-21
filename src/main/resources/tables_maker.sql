@@ -1,6 +1,6 @@
 CREATE TABLE customers
 (
-    `registration_code` INT PRIMARY KEY AUTO_INCREMENT,
+    `registrationСode` INT PRIMARY KEY AUTO_INCREMENT,
     `full_name`         VARCHAR(255),
     `email`            VARCHAR(255),
     `telephone`        VARCHAR(20)
@@ -11,7 +11,7 @@ CREATE TABLE orders
     `order_id`        INT PRIMARY KEY AUTO_INCREMENT,
     `customer_id`     INT,
     `submission_date` DATE,
-    FOREIGN KEY (`customer_id`) REFERENCES `customers` (`registration_code`)
+    FOREIGN KEY (`customer_id`) REFERENCES `customers` (`registrationСode`)
 );
 
 

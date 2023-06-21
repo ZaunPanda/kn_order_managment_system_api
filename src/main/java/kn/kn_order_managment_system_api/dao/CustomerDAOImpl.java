@@ -22,7 +22,7 @@ public class CustomerDAOImpl implements CustomerDAO{
     @Override
     public void saveCustomer(Customer customer) {
         Customer newCustomer = entityManager.merge(customer);
-        customer.setRegistration_code(newCustomer.getRegistration_code());
+        customer.setRegistrationСode(newCustomer.getRegistrationСode());
 
     }
 

@@ -51,9 +51,9 @@ public class OrderDAOImpl implements OrderDAO{
 
     @Override
     public List<Order> getAllOrdersByCustomer(Customer customer) {
-        int customerId = customer.getRegistration_code();
-        Query query = entityManager.createQuery("from Order where customer_id=:customerId");
-        List<Order> allOrdersByDate= query.getResultList();
+//        Query query = entityManager.createQuery("FROM Order WHERE customerId = :customer");
+//        query.setParameter("customer", customer);
+//        List<Order> allOrdersBycustomer= query.getResultList();
         return null;
     }
 

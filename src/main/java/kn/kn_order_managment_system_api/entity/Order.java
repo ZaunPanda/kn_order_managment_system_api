@@ -11,15 +11,15 @@ public class Order {
     private int order_id;
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    private Customer customer;
+    private Customer customerId;
     @Column(name = "submission_date")
     private String submission_date;
 
     public Order() {
     }
 
-    public Order(Customer customer, String submission_date) {
-        this.customer = customer;
+    public Order(Customer customerId, String submission_date) {
+        this.customerId = customerId;
         this.submission_date = submission_date;
     }
 
@@ -31,12 +31,12 @@ public class Order {
         this.order_id = order_id;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Customer getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomerId(Customer customerId) {
+        this.customerId = customerId;
     }
 
     public String getSubmission_date() {

@@ -9,7 +9,7 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "registration_code")
-    private int registration_code;
+    private int registrationСode;
     @Column(name = "full_name")
     private String full_name;
     @Column(name = "email")
@@ -26,12 +26,12 @@ public class Customer {
         this.telephone = telephone;
     }
 
-    public int getRegistration_code() {
-        return registration_code;
+    public int getRegistrationСode() {
+        return registrationСode;
     }
 
-    public void setRegistration_code(int registration_code) {
-        this.registration_code = registration_code;
+    public void setRegistrationСode(int registrationСode) {
+        this.registrationСode = registrationСode;
     }
 
     public String getFull_name() {

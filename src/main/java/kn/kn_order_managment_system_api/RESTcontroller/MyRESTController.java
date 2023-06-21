@@ -5,7 +5,6 @@ import kn.kn_order_managment_system_api.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -41,16 +40,20 @@ public class MyRESTController {
         return orderService.getAllOrders();
     }
 
-    @RequestMapping("/orders_by_date/{text_date}")
+    @RequestMapping("/orders-by-date/{text_date}")
     public List<Order> showAllOrdersByDate(@PathVariable String text_date) throws ParseException {
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date date = sdf1.parse(text_date);
         java.sql.Date sqlStartDate = new java.sql.Date(date.getTime());
         return orderService.getAllOrdersByDate(sqlStartDate);
     }
-    @RequestMapping("/orders_by_product")
+    @RequestMapping("/orders-by-product")
     public List<Order> showAllOrdersByProduct(@RequestBody Product product) {
         return orderService.getAllOrdersByProduct(product);
+    }
+    @RequestMapping("/orders-by-customer")
+    public List<Order> showAllOrdersByCustomer(@RequestBody Customer product) {
+        return orderService.getAllOrdersByCustomer(product);
     }
 
     @PostMapping("/orders")
