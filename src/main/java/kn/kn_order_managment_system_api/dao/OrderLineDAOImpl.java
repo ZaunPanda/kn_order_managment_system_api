@@ -2,7 +2,6 @@ package kn.kn_order_managment_system_api.dao;
 
 import jakarta.persistence.*;
 import jakarta.persistence.Query;
-import kn.kn_order_managment_system_api.entity.Order;
 import kn.kn_order_managment_system_api.entity.OrderLine;
 import org.springframework.stereotype.Repository;
 
@@ -21,18 +20,18 @@ public class OrderLineDAOImpl implements OrderLineDAO{
     @Override
     public void saveOrderLine(OrderLine orderLine) {
         OrderLine NewOrderLine = entityManager.merge(orderLine);
-        orderLine.setOrderLine_id(NewOrderLine.getOrderLine_id());
+        orderLine.setOrderLineId(NewOrderLine.getOrderLineId());
     }
 
     @Override
-    public OrderLine getOrderLine(int orderLine_id) {
-        OrderLine orderLine =  entityManager.find(OrderLine.class,orderLine_id);
+    public OrderLine getOrderLine(int orderLineId) {
+        OrderLine orderLine =  entityManager.find(OrderLine.class,orderLineId);
         return orderLine;
     }
 
     @Override
-    public void deleteOrderLine(int orderLine_id) {
-        Query query = entityManager.createQuery("delete from OrderLine where orderLine_id=:orderLine_id");
+    public void deleteOrderLine(int orderLineId) {
+        Query query = entityManager.createQuery("delete from OrderLine where orderLineId=:orderLineId");
         query.executeUpdate();
 
     }

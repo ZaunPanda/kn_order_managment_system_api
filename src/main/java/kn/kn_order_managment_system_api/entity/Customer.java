@@ -9,9 +9,9 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "registration_code")
-    private int registrationСode;
+    private int registrationCode;
     @Column(name = "full_name")
-    private String full_name;
+    private String fullName;
     @Column(name = "email")
     private String email;
     @Column(name = "telephone")
@@ -20,26 +20,26 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String full_name, String email, String telephone) {
-        this.full_name = full_name;
+    public Customer(String fullName, String email, String telephone) {
+        this.fullName = fullName;
         this.email = email;
         this.telephone = telephone;
     }
 
-    public int getRegistrationСode() {
-        return registrationСode;
+    public int getRegistrationCode() {
+        return registrationCode;
     }
 
-    public void setRegistrationСode(int registrationСode) {
-        this.registrationСode = registrationСode;
+    public void setRegistrationCode(int registrationCode) {
+        this.registrationCode = registrationCode;
     }
 
-    public String getFull_name() {
-        return full_name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFull_name(String full_name) {
-        this.full_name = full_name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getEmail() {

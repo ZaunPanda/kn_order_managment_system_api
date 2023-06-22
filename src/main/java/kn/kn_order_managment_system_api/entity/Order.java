@@ -8,27 +8,27 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
-    private int order_id;
+    private int orderId;
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customerId;
     @Column(name = "submission_date")
-    private String submission_date;
+    private String submissionDate;
 
     public Order() {
     }
 
-    public Order(Customer customerId, String submission_date) {
+    public Order(Customer customerId, String submissionDate) {
         this.customerId = customerId;
-        this.submission_date = submission_date;
+        this.submissionDate = submissionDate;
     }
 
-    public int getOrder_id() {
-        return order_id;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setOrder_id(int order_id) {
-        this.order_id = order_id;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
     public Customer getCustomerId() {
@@ -39,11 +39,11 @@ public class Order {
         this.customerId = customerId;
     }
 
-    public String getSubmission_date() {
-        return submission_date;
+    public String getSubmissionDate() {
+        return submissionDate;
     }
 
-    public void setSubmission_date(String submission_date) {
-        this.submission_date = submission_date;
+    public void setSubmissionDate(String submissionDate) {
+        this.submissionDate = submissionDate;
     }
 }

@@ -8,11 +8,11 @@ import java.sql.Date;
 import java.util.List;
 
 public interface OrderDAO {
-    public List<Order> getAllOrders();
-    public void saveOrder(Order order);
-    public Order getOrder(int order_id);
-    public List<Order> getAllOrdersByDate(Date date);
-    public List<Order> getAllOrdersByProduct(Product product);
-    public List<Order> getAllOrdersByCustomer(Customer customer);
-    public void deleteOrder(int order_id);
+    List<Order> getAllOrders();
+    void saveOrder(Order order);
+    Order getOrder(int order_id);
+    List<Order> getAllOrdersByDate(Date date);
+    List<Order> getAllOrdersByProduct(Product product);
+    List<Order> getAllOrdersByCustomer(Customer customerId);
+    void deleteOrder(int order_id);
 }

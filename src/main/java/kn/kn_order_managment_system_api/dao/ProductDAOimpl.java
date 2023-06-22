@@ -1,7 +1,6 @@
 package kn.kn_order_managment_system_api.dao;
 
 import jakarta.persistence.*;
-import kn.kn_order_managment_system_api.entity.OrderLine;
 import kn.kn_order_managment_system_api.entity.Product;
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +18,7 @@ public class ProductDAOimpl implements ProductDAO {
     @Override
     public void saveProduct(Product product) {
         Product NewProduct = entityManager.merge(product);
-        product.setProduct_id(NewProduct.getProduct_id());
+        product.setProductId(NewProduct.getProductId());
     }
 
     @Override

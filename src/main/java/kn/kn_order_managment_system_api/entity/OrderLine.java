@@ -8,13 +8,13 @@ public class OrderLine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "orderline_id")
-    private int orderLine_id;
+    private int orderLineId;
     @ManyToOne
     @JoinColumn(name = "order_id")
-    private Order order_id;
+    private Order orderId;
     @ManyToOne
     @JoinColumn(name = "product_id")
-    private Product product_id;
+    private Product productId;
 
     @JoinColumn(name = "quantity")
     private int quantity;
@@ -22,34 +22,34 @@ public class OrderLine {
     public OrderLine() {
     }
 
-    public OrderLine(Order order_id, Product product_id, int quantity) {
-        this.order_id = order_id;
-        this.product_id = product_id;
+    public OrderLine(Order orderId, Product product_id, int quantity) {
+        this.orderId = orderId;
+        this.productId = product_id;
         this.quantity = quantity;
     }
 
-    public int getOrderLine_id() {
-        return orderLine_id;
+    public int getOrderLineId() {
+        return orderLineId;
     }
 
-    public void setOrderLine_id(int orderLine_id) {
-        this.orderLine_id = orderLine_id;
+    public void setOrderLineId(int orderLineId) {
+        this.orderLineId = orderLineId;
     }
 
-    public Order getOrder_id() {
-        return order_id;
+    public Order getOrderId() {
+        return orderId;
     }
 
-    public void setOrder_id(Order order_id) {
-        this.order_id = order_id;
+    public void setOrderId(Order orderId) {
+        this.orderId = orderId;
     }
 
-    public Product getProduct_id() {
-        return product_id;
+    public Product getProductId() {
+        return productId;
     }
 
-    public void setProduct_id(Product product_id) {
-        this.product_id = product_id;
+    public void setProductId(Product productId) {
+        this.productId = productId;
     }
 
     public int getQuantity() {

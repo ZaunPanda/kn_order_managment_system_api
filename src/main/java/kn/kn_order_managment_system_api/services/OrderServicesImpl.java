@@ -49,13 +49,13 @@ public class OrderServicesImpl implements OrderService{
 
     @Override
     @Transactional
-    public List<Order> getAllOrdersByCustomer(Customer customer) {
-        return orderDAO.getAllOrdersByCustomer(customer);
+    public List<Order> getAllOrdersByCustomer(Customer customerId) {
+        return orderDAO.getAllOrdersByCustomer(customerId);
     }
 
     @Override
     @Transactional
-    public void deleteOrder(int order_id) {
-        orderDAO.deleteOrder(order_id);
+    public void deleteOrder(int orderId) {
+        orderDAO.deleteOrder(orderId);
     }
 }

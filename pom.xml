@@ -11,7 +11,7 @@
     <groupId>kn</groupId>
     <artifactId>kn_order_managment_system_api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <product_name>kn_order_managment_system_api</product_name>
+    <productName>kn_order_managment_system_api</productName>
     <description>kn_order_managment_system_api</description>
     <properties>
         <java.version>17</java.version>
