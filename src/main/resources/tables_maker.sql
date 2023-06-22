@@ -11,7 +11,7 @@ CREATE TABLE orders
     `order_id`        INT PRIMARY KEY AUTO_INCREMENT,
     `customer_id`     INT,
     `submission_date` DATE,
-    FOREIGN KEY (`customer_id`) REFERENCES `customers` (`registrationСode`)
+    FOREIGN KEY (`customer_id`) REFERENCES `customers` (`registration_code`)
 );
 
 
