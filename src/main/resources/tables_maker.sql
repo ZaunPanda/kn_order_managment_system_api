@@ -24,7 +24,7 @@ CREATE TABLE products
     `unit_price` INT
 );
 
-CREATE TABLE orderLines
+CREATE TABLE order_lines
 (
     `orderline_id` INT PRIMARY KEY AUTO_INCREMENT,
     `order_id`     INT,
