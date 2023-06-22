@@ -1,6 +1,6 @@
 CREATE TABLE customers
 (
-    `registrationСode` INT PRIMARY KEY AUTO_INCREMENT,
+    `registration_сode` INT PRIMARY KEY AUTO_INCREMENT,
     `full_name`         VARCHAR(255),
     `email`            VARCHAR(255),
     `telephone`        VARCHAR(20)
@@ -26,7 +26,7 @@ CREATE TABLE products
 
 CREATE TABLE orderLines
 (
-    `orderLine_id` INT PRIMARY KEY AUTO_INCREMENT,
+    `orderline_id` INT PRIMARY KEY AUTO_INCREMENT,
     `order_id`     INT,
     `product_id`   INT,
     `quantity`     INT,
