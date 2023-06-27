@@ -35,7 +35,7 @@ public class MyRESTController {
     }
 
     @PostMapping("/customers")
-    public Customer addCustomer(@RequestBody Customer customer) throws Exception {
+    public CustomerDTO addCustomer(@RequestBody CustomerDTO customer) throws Exception {
         if (customer.getFullName() == null) {
             throw new Exception("Add name of customer");
         }

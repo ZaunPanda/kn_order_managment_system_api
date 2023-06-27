@@ -27,9 +27,9 @@ public class CustomerDAOImpl implements CustomerDAO{
     }
 
     @Override
-    public void saveCustomer(Customer customer) {
-        Customer newCustomer = entityManager.merge(customer);
-        customer.setRegistrationCode(newCustomer.getRegistrationCode());
+    public void saveCustomer(CustomerDTO customerDTO) {
+        Customer newCustomer = modelMapper.map(customerDTO, Customer.class);
+        newCustomer.setRegistrationCode(newCustomer.getRegistrationCode());
 
     }
 
