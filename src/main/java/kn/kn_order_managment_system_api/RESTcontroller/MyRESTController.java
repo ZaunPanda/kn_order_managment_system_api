@@ -1,5 +1,6 @@
 package kn.kn_order_managment_system_api.RESTcontroller;
 
+import kn.kn_order_managment_system_api.dto.CustomerDTO;
 import kn.kn_order_managment_system_api.entity.*;
 import kn.kn_order_managment_system_api.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,13 @@ public class MyRESTController {
     private ProductService productService;
 
     @RequestMapping("/customers")
-    public List<Customer> showAllCustomers() {
+    public List<CustomerDTO> showAllCustomers() {
         return customerService.getAllCustomers();
+    }
+
+    @RequestMapping("/customers/{id}")
+    public CustomerDTO getCustomer(@PathVariable int id) {
+        return customerService.getCustomer(id);
     }
 
     @PostMapping("/customers")

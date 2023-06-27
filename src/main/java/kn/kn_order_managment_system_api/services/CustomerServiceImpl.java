@@ -2,6 +2,7 @@ package kn.kn_order_managment_system_api.services;
 
 import jakarta.transaction.Transactional;
 import kn.kn_order_managment_system_api.dao.CustomerDAO;
+import kn.kn_order_managment_system_api.dto.CustomerDTO;
 import kn.kn_order_managment_system_api.entity.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     @Transactional
-    public List<Customer> getAllCustomers() {
+    public List<CustomerDTO> getAllCustomers() {
         return customerDAO.getAllCustomers();
     }
 
@@ -27,7 +28,7 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     @Transactional
-    public Customer getCustomer(int customer_id) {
+    public CustomerDTO getCustomer(int customer_id) {
         return customerDAO.getCustomer(customer_id);
     }
 

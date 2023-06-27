@@ -3,7 +3,11 @@ package kn.kn_order_managment_system_api.dao;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
+import kn.kn_order_managment_system_api.dto.CustomerDTO;
 import kn.kn_order_managment_system_api.entity.Customer;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,6 +15,9 @@ import java.util.List;
 public class CustomerDAOImpl implements CustomerDAO{
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Autowired
+    private ModelMapper modelMapper;
     @Override
     public List getAllCustomers() {
 
@@ -27,9 +34,10 @@ public class CustomerDAOImpl implements CustomerDAO{
     }
 
     @Override
-    public Customer getCustomer(int RegistrationCode) {
-        Customer customer =  entityManager.find(Customer.class,RegistrationCode);
-        return customer;
+    public CustomerDTO getCustomer(int RegistrationCode) {
+        Customer customerFromDB =  entityManager.find(Customer.class,RegistrationCode);
+        CustomerDTO customerDTO = this.modelMapper.map(customerFromDB, CustomerDTO.class);
+        return customerDTO;
     }
 
     @Override
