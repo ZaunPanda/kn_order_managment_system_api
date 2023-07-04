@@ -1,6 +1,7 @@
 package kn.kn_order_managment_system_api.RESTcontroller;
 
 import kn.kn_order_managment_system_api.dto.CustomerDTO;
+import kn.kn_order_managment_system_api.dto.OrderDTO;
 import kn.kn_order_managment_system_api.entity.*;
 import kn.kn_order_managment_system_api.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,12 +45,12 @@ public class MyRESTController {
     }
 
     @RequestMapping("/orders")
-    public List<Order> showAllOrders() {
+    public List<OrderDTO> showAllOrders() {
         return orderService.getAllOrders();
     }
 
     @RequestMapping("/orders-by-date/{text_date}")
-    public List<Order> showAllOrdersByDate(@PathVariable String text_date) throws Exception {
+    public List<OrderDTO> showAllOrdersByDate(@PathVariable String text_date) throws Exception {
         if (text_date == null) {
             throw new Exception("Add date to link");
         }
@@ -59,12 +60,12 @@ public class MyRESTController {
         return orderService.getAllOrdersByDate(sqlStartDate);
     }
     @RequestMapping("/orders-by-product")
-    public List<Order> showAllOrdersByProduct(@RequestBody Product product) {
+    public List<OrderDTO> showAllOrdersByProduct(@RequestBody Product product) {
 
         return orderService.getAllOrdersByProduct(product);
     }
     @RequestMapping("/orders-by-customer")
-    public List<Order> showAllOrdersByCustomer(@RequestBody Customer customer) throws Exception {
+    public List<OrderDTO> showAllOrdersByCustomer(@RequestBody Customer customer) throws Exception {
         if (customer.getRegistrationCode() == 0) {
             throw new Exception("Add valid registartion code");
         }
@@ -72,7 +73,7 @@ public class MyRESTController {
     }
 
     @PostMapping("/orders")
-    public Order addOrder(@RequestBody Order order) {
+    public OrderDTO addOrder(@RequestBody OrderDTO order) {
         Timestamp instant = Timestamp.from(Instant.now());
         order.setSubmissionDate(instant.toString());
         orderService.saveOrder(order);

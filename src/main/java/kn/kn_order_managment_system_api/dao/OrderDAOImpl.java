@@ -1,6 +1,9 @@
 package kn.kn_order_managment_system_api.dao;
 
 import jakarta.persistence.*;
+import kn.kn_order_managment_system_api.dto.CustomerDTO;
+import org.modelmapper.ModelMapper;
+import kn.kn_order_managment_system_api.dto.OrderDTO;
 import kn.kn_order_managment_system_api.entity.Customer;
 import kn.kn_order_managment_system_api.entity.Order;
 import kn.kn_order_managment_system_api.entity.Product;
@@ -12,48 +15,53 @@ import java.util.List;
 public class OrderDAOImpl implements OrderDAO{
     @PersistenceContext
     private EntityManager entityManager;
+
+    private ModelMapper modelMapper;
     @Override
-    public List<Order> getAllOrders() {
+    public List<OrderDTO> getAllOrders() {
         Query query = entityManager.createQuery("from Order ");
-        List<Order> allOrders= query.getResultList();
+        List<OrderDTO> allOrders= query.getResultList();
         return allOrders;
     }
 
     @Override
-    public void saveOrder(Order order) {
-        Order newOrder = entityManager.merge(order);
-        order.setOrderId(newOrder.getOrderId());
+    public void saveOrder(OrderDTO orderDTO) {
+        Order newOrder = modelMapper.map(orderDTO, Order.class);
+        entityManager.merge(newOrder);
+
 
     }
 
     @Override
-    public Order getOrder(int order_id) {
+    public OrderDTO getOrder(int order_id) {
         Order order =  entityManager.find(Order.class,order_id);
-        return order;
+        OrderDTO orderDTO = this.modelMapper.map(order, OrderDTO.class);
+
+        return orderDTO;
     }
 
     @Override
-    public List<Order> getAllOrdersByDate(Date date) {
+    public List<OrderDTO> getAllOrdersByDate(Date date) {
         Query query = entityManager.createQuery("from Order where submissionDate=:date");
         query.setParameter("date", date.toString());
-        List<Order> allOrdersByDate= query.getResultList();
+        List<OrderDTO> allOrdersByDate= query.getResultList();
         return allOrdersByDate;
     }
 
     @Override
-    public List<Order> getAllOrdersByProduct(Product product) {
+    public List<OrderDTO> getAllOrdersByProduct(Product product) {
         Query query = entityManager.createQuery("SELECT orderId FROM OrderLine WHERE productId = :product");
         query.setParameter("product", product);
-        List<Order> allOrdersByProduct = query.getResultList();
+        List<OrderDTO> allOrdersByProduct = query.getResultList();
 
         return allOrdersByProduct;
     }
 
     @Override
-    public List<Order> getAllOrdersByCustomer(Customer customerId) {
+    public List<OrderDTO> getAllOrdersByCustomer(Customer customerId) {
         Query query = entityManager.createQuery("FROM Order WHERE customerId = :customerId");
         query.setParameter("customerId", customerId);
-        List<Order> allOrdersBycustomer= query.getResultList();
+        List<OrderDTO> allOrdersBycustomer= query.getResultList();
         return allOrdersBycustomer;
     }
 

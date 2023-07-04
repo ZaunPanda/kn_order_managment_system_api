@@ -1,6 +1,5 @@
 package kn.kn_order_managment_system_api.dto;
 
-import jakarta.persistence.Column;
 
 public class CustomerDTO {
     private int registrationCode;
