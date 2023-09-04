@@ -2,30 +2,33 @@ package kn.kn_order_managment_system_api.dao;
 
 import jakarta.persistence.*;
 import jakarta.persistence.Query;
+import kn.kn_order_managment_system_api.dto.OrderLineDTO;
 import kn.kn_order_managment_system_api.entity.OrderLine;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
 public class OrderLineDAOImpl implements OrderLineDAO{
+    private ModelMapper modelMapper;
     @PersistenceContext
     private EntityManager entityManager;
     @Override
-    public List<OrderLine> getAllOrderLines() {
+    public List<OrderLineDTO> getAllOrderLines() {
         Query query = entityManager.createQuery("from OrderLine ");
-        List<OrderLine> allOrderLines= query.getResultList();
+        List<OrderLineDTO> allOrderLines= query.getResultList();
         return allOrderLines;
     }
 
     @Override
-    public void saveOrderLine(OrderLine orderLine) {
-        OrderLine NewOrderLine = entityManager.merge(orderLine);
-        orderLine.setOrderLineId(NewOrderLine.getOrderLineId());
+    public void saveOrderLine(OrderLineDTO orderLineDTO) {
+        OrderLine newOrderLine = modelMapper.map(orderLineDTO, OrderLine.class);
+        entityManager.merge(newOrderLine);
     }
 
     @Override
-    public OrderLine getOrderLine(int orderLineId) {
-        OrderLine orderLine =  entityManager.find(OrderLine.class,orderLineId);
+    public OrderLineDTO getOrderLine(int orderLineId) {
+        OrderLineDTO orderLine =  entityManager.find(OrderLineDTO.class,orderLineId);
         return orderLine;
     }
 

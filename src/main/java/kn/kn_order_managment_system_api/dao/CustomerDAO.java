@@ -1,8 +1,7 @@
 package kn.kn_order_managment_system_api.dao;
 
 import kn.kn_order_managment_system_api.dto.CustomerDTO;
-import kn.kn_order_managment_system_api.entity.Customer;
-import org.apache.catalina.mapper.Mapper;
+import org.modelmapper.ModelMapper;
 
 import java.util.List;
 

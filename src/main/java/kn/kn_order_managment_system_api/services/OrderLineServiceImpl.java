@@ -2,6 +2,7 @@ package kn.kn_order_managment_system_api.services;
 
 import jakarta.transaction.Transactional;
 import kn.kn_order_managment_system_api.dao.OrderLineDAO;
+import kn.kn_order_managment_system_api.dto.OrderLineDTO;
 import kn.kn_order_managment_system_api.entity.OrderLine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,19 +16,19 @@ public class OrderLineServiceImpl implements OrderLineService{
 
     @Override
     @Transactional
-    public List<OrderLine> getAllOrderLines() {
+    public List<OrderLineDTO> getAllOrderLines() {
         return orderLineDAO.getAllOrderLines();
     }
 
     @Override
     @Transactional
-    public void saveOrderLine(OrderLine orderLine) {
-        orderLineDAO.saveOrderLine(orderLine);
+    public void saveOrderLine(OrderLineDTO orderLineDTO) {
+        orderLineDAO.saveOrderLine(orderLineDTO);
     }
 
     @Override
     @Transactional
-    public OrderLine getOrderLine(int orderLine_id) {
+    public OrderLineDTO getOrderLine(int orderLine_id) {
         return orderLineDAO.getOrderLine(orderLine_id);
     }
 
