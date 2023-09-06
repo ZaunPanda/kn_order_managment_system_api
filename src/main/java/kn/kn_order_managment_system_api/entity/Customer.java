@@ -1,14 +1,20 @@
 package kn.kn_order_managment_system_api.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "customers")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "registration_code")
+    @Column(name = "registration_code", unique = true)
     private int registrationCode;
     @Column(name = "full_name")
     private String fullName;
@@ -16,9 +22,6 @@ public class Customer {
     private String email;
     @Column(name = "telephone")
     private String telephone;
-
-    public Customer() {
-    }
 
     public Customer(String fullName, String email, String telephone) {
         this.fullName = fullName;

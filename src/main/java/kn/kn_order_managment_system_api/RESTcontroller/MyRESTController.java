@@ -45,6 +45,10 @@ public class MyRESTController {
         customerService.saveCustomer(customer);
         return customer;
     }
+    @RequestMapping("/customers_delete/{id}")
+    public void deleteCustomer(@PathVariable int id) {
+        customerService.deleteCustomer(id);
+    }
 
     @RequestMapping("/orders")
     public List<OrderDTO> showAllOrders() {
