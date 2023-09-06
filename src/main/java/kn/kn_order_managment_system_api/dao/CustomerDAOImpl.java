@@ -33,23 +33,26 @@ public class CustomerDAOImpl implements CustomerDAO{
     }
 
     @Override
-    public CustomerDTO getCustomer(int registrationCode) {
-        Query query = entityManager.createQuery("from Customer с where с.registrationCode=:RegistrationCode");
-        query.setParameter("RegistrationCode", registrationCode);
-        List<CustomerDTO>  allCustomers = query.getResultList();
+    public CustomerDTO getCustomer(int registrationCode) throws Exception {
 
-        return allCustomers.get(0);
+        Customer customer = entityManager.find(Customer.class, registrationCode);
+        if (customer != null) {
+            CustomerDTO dtoCustomer = modelMapper.map(customer, CustomerDTO.class);
+            return dtoCustomer;
+        } else {
+            throw new Exception("Customer id is not presented in database");
+        }
+
     }
 
 
     @Override
-    public void deleteCustomer(int RegistrationCode) {
+    public void deleteCustomer(int RegistrationCode) throws Exception {
         Customer customer = entityManager.find(Customer.class, RegistrationCode);
         if (customer != null) {
             entityManager.remove(customer);
         } else {
-            // Handle the case where the customer with the specified registration code doesn't exist.
-            // You can throw an exception or log an error message here.
+            throw new Exception("Customer id is not presented in database");
         }
 
     }

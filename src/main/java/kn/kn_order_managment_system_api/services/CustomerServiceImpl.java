@@ -27,13 +27,13 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     @Transactional
-    public CustomerDTO getCustomer(int customer_id) {
+    public CustomerDTO getCustomer(int customer_id) throws Exception {
         return customerDAO.getCustomer(customer_id);
     }
 
     @Transactional
     @Override
-    public void deleteCustomer(int customer_id) {
+    public void deleteCustomer(int customer_id) throws Exception {
         customerDAO.deleteCustomer(customer_id);
     }
 }

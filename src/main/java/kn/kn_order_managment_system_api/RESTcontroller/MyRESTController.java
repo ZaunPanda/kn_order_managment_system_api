@@ -33,7 +33,7 @@ public class MyRESTController {
     }
 
     @RequestMapping("/customers/{id}")
-    public CustomerDTO getCustomer(@PathVariable int id) {
+    public CustomerDTO getCustomer(@PathVariable int id) throws Exception {
         return customerService.getCustomer(id);
     }
 
@@ -46,7 +46,7 @@ public class MyRESTController {
         return customer;
     }
     @RequestMapping("/customers_delete/{id}")
-    public void deleteCustomer(@PathVariable int id) {
+    public void deleteCustomer(@PathVariable int id) throws Exception {
         customerService.deleteCustomer(id);
     }
 
