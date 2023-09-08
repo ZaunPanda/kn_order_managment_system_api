@@ -1,9 +1,15 @@
 package kn.kn_order_managment_system_api.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "products")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,8 +22,6 @@ public class Product {
     @Column(name = "unit_price")
     private String unitPrice;
 
-    public Product() {
-    }
     public Product(String product_name, String skuCode, String unitPrice) {
         this.productName = product_name;
         this.skuCode = skuCode;

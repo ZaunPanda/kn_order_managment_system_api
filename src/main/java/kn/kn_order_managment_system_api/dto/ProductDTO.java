@@ -1,11 +1,25 @@
 package kn.kn_order_managment_system_api.dto;
 
+import lombok.Builder;
+import lombok.Data;
 
+@Builder
+@Data
 public class ProductDTO {
     private int productId;
     private String productName;
     private String skuCode;
     private String unitPrice;
+
+    public ProductDTO() {
+    }
+
+    public ProductDTO(int productId, String productName, String skuCode, String unitPrice) {
+        this.productId = productId;
+        this.productName = productName;
+        this.skuCode = skuCode;
+        this.unitPrice = unitPrice;
+    }
 
     public int getProductId() {
         return productId;

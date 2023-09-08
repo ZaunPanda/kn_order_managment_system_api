@@ -1,9 +1,15 @@
 package kn.kn_order_managment_system_api.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "orders")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,9 +20,6 @@ public class Order {
     private Customer customerId;
     @Column(name = "submission_date")
     private String submissionDate;
-
-    public Order() {
-    }
 
     public Order(Customer customerId, String submissionDate) {
         this.customerId = customerId;

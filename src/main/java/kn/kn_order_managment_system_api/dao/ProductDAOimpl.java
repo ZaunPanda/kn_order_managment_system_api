@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import kn.kn_order_managment_system_api.dto.ProductDTO;
 import kn.kn_order_managment_system_api.entity.Product;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 public class ProductDAOimpl implements ProductDAO {
     @PersistenceContext
     private EntityManager entityManager;
+    @Autowired
     private ModelMapper modelMapper;
     @Override
     public List<ProductDTO> getAllProducts() {
@@ -21,13 +23,14 @@ public class ProductDAOimpl implements ProductDAO {
     @Override
     public void saveProduct(ProductDTO productDTO) {
         Product NewProduct = modelMapper.map(productDTO, Product.class);
-        entityManager.merge(NewProduct);
+        entityManager.persist(NewProduct);
     }
 
     @Override
     public ProductDTO getProduct(int product_id) {
-        ProductDTO productDTO =  entityManager.find(ProductDTO.class,product_id);
-        return productDTO;
+        Product DBproduct =  entityManager.find(Product.class,product_id);
+        ProductDTO DBproductDTO = modelMapper.map(DBproduct, ProductDTO.class);
+        return DBproductDTO;
     }
 
     @Override

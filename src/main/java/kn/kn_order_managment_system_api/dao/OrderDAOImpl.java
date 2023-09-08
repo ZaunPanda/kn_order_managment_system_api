@@ -6,6 +6,8 @@ import kn.kn_order_managment_system_api.dto.OrderDTO;
 import kn.kn_order_managment_system_api.entity.Customer;
 import kn.kn_order_managment_system_api.entity.Order;
 import kn.kn_order_managment_system_api.entity.Product;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
@@ -14,24 +16,25 @@ import java.util.List;
 public class OrderDAOImpl implements OrderDAO{
     @PersistenceContext
     private EntityManager entityManager;
+    @Autowired
+    private ModelMapper modelMapper;
     @Override
     public List<OrderDTO> getAllOrders() {
         Query query = entityManager.createQuery("from Order ");
         List<OrderDTO> allOrders= query.getResultList();
         return allOrders;
     }
-
     @Override
-    public void saveOrder(OrderDTO order) {
-        OrderDTO newOrder = entityManager.merge(order);
-        order.setOrderId(newOrder.getOrderId());
-
+    public void saveOrder(OrderDTO orderDTO) {
+        Order newOrder = modelMapper.map(orderDTO, Order.class);
+        entityManager.persist(newOrder);
     }
 
     @Override
     public OrderDTO getOrder(int order_id) {
-        OrderDTO order =  entityManager.find(OrderDTO.class,order_id);
-        return order;
+        Order order =  entityManager.find(Order.class,order_id);
+        OrderDTO newOrder = modelMapper.map(order, OrderDTO.class);
+        return newOrder;
     }
 
     @Override
@@ -52,21 +55,18 @@ public class OrderDAOImpl implements OrderDAO{
     }
 
     @Override
-    public List<OrderDTO> getAllOrdersByCustomer(CustomerDTO customerId) {
-        return null;
-    }
-
-    @Override
-    public List<OrderDTO> getAllOrdersByCustomer(Customer customerId) {
-        Query query = entityManager.createQuery("FROM Order WHERE customerId = :customerId");
-        query.setParameter("customerId", customerId);
-        List<OrderDTO> allOrdersBycustomer= query.getResultList();
-        return allOrdersBycustomer;
+    public List<OrderDTO> getAllOrdersByCustomer(CustomerDTO customerDTO) {
+        Customer customer = modelMapper.map(customerDTO, Customer.class);
+        Query query = entityManager.createQuery("FROM Order WHERE customerId = :customer");
+        query.setParameter("customer", customer);
+        List<OrderDTO> allOrdersByCustomer = query.getResultList();
+        return allOrdersByCustomer;
     }
 
     @Override
     public void deleteOrder(int order_id) {
         Query query = entityManager.createQuery("delete from Order where orderId=:order_id");
+        query.setParameter("order_id", order_id);
         query.executeUpdate();
     }
 }

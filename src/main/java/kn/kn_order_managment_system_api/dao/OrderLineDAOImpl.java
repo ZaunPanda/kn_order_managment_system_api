@@ -5,11 +5,13 @@ import jakarta.persistence.Query;
 import kn.kn_order_managment_system_api.dto.OrderLineDTO;
 import kn.kn_order_managment_system_api.entity.OrderLine;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
 public class OrderLineDAOImpl implements OrderLineDAO{
+    @Autowired
     private ModelMapper modelMapper;
     @PersistenceContext
     private EntityManager entityManager;
@@ -23,7 +25,7 @@ public class OrderLineDAOImpl implements OrderLineDAO{
     @Override
     public void saveOrderLine(OrderLineDTO orderLineDTO) {
         OrderLine newOrderLine = modelMapper.map(orderLineDTO, OrderLine.class);
-        entityManager.merge(newOrderLine);
+        entityManager.persist(newOrderLine);
     }
 
     @Override

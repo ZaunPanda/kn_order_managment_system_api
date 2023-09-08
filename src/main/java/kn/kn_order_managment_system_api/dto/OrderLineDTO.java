@@ -2,12 +2,26 @@ package kn.kn_order_managment_system_api.dto;
 
 import kn.kn_order_managment_system_api.entity.Order;
 import kn.kn_order_managment_system_api.entity.Product;
+import lombok.Builder;
+import lombok.Data;
 
+@Builder
+@Data
 public class OrderLineDTO {
     private int orderLineId;
     private Order orderId;
     private Product productId;
     private int quantity;
+
+    public OrderLineDTO() {
+    }
+
+    public OrderLineDTO(int orderLineId, Order orderId, Product productId, int quantity) {
+        this.orderLineId = orderLineId;
+        this.orderId = orderId;
+        this.productId = productId;
+        this.quantity = quantity;
+    }
 
     public int getOrderLineId() {
         return orderLineId;

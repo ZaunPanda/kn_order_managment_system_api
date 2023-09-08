@@ -3,17 +3,20 @@ package kn.kn_order_managment_system_api.dao;
 import jakarta.transaction.Transactional;
 import kn.kn_order_managment_system_api.dto.CustomerDTO;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.List;
 
 @SpringBootTest
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 @Transactional
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class CustomerDAOImplTest {
     @Autowired
     private CustomerDAO customerDAO;
@@ -41,7 +44,7 @@ public class CustomerDAOImplTest {
         Assertions.assertThat(allCustomers.size()).isEqualTo(2);
     }
     @Test
-    public void CustomerDAO_saveCustomer_ReturnCustomer() {
+    public void CustomerDAO_saveCustomer_ReturnCustomer() throws Exception {
 
         CustomerDTO customer = CustomerDTO.builder()
                 .fullName("CustomerSaveCustomer")
@@ -52,11 +55,10 @@ public class CustomerDAOImplTest {
         customerDAO.saveCustomer(customer);
 
         CustomerDTO retrievedCustomer = customerDAO.getCustomer(1);
-
-        Assertions.assertThat(retrievedCustomer).isNotNull();
+        Assertions.assertThat(retrievedCustomer.getFullName()).isEqualTo(customer.getFullName());
     }
     @Test
-    public void CustomerDAO_getCustomer_ReturnCustomer() {
+    public void CustomerDAO_getCustomer_ReturnCustomer() throws Exception {
 
         CustomerDTO customer = CustomerDTO.builder()
                 .fullName("CustomerGetCustomer")
@@ -66,13 +68,12 @@ public class CustomerDAOImplTest {
 
         customerDAO.saveCustomer(customer);
 
-        List<CustomerDTO> allCustomers = customerDAO.getAllCustomers();
-
-        Assertions.assertThat(allCustomers.size()).isEqualTo(1);
+        CustomerDTO retrievedCustomer = customerDAO.getCustomer(1);
+        Assertions.assertThat(retrievedCustomer.getFullName()).isEqualTo(customer.getFullName());
     }
 
     @Test
-    public void CustomerDAO_deleteCustomer_ReturnCustomer() {
+    public void CustomerDAO_deleteCustomer_ReturnCustomer() throws Exception {
 
         CustomerDTO customer = CustomerDTO.builder()
                 .fullName("CustomerOne")

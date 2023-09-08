@@ -1,9 +1,15 @@
 package kn.kn_order_managment_system_api.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "order_lines")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class OrderLine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,9 +24,6 @@ public class OrderLine {
 
     @JoinColumn(name = "quantity")
     private int quantity;
-
-    public OrderLine() {
-    }
 
     public OrderLine(Order orderId, Product product_id, int quantity) {
         this.orderId = orderId;
