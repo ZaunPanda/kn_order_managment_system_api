@@ -40,20 +40,18 @@ public class CustomerDAOImpl implements CustomerDAO{
             CustomerDTO dtoCustomer = modelMapper.map(customer, CustomerDTO.class);
             return dtoCustomer;
         } else {
-            throw new Exception("Customer id is not presented in database");
+            return null;
         }
 
     }
 
 
     @Override
-    public void deleteCustomer(int RegistrationCode) throws Exception {
-        Customer customer = entityManager.find(Customer.class, RegistrationCode);
-        if (customer != null) {
-            entityManager.remove(customer);
-        } else {
-            throw new Exception("Customer id is not presented in database");
-        }
+    public void deleteCustomer(int RegistrationCode){
+        Query query = entityManager.createQuery("delete from Customer where registrationCode=:RegistrationCode");
+        query.setParameter("RegistrationCode", RegistrationCode);
+        query.executeUpdate();
+        entityManager.clear();
 
     }
 }

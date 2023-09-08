@@ -9,7 +9,6 @@ import kn.kn_order_managment_system_api.entity.Customer;
 import kn.kn_order_managment_system_api.entity.Order;
 import kn.kn_order_managment_system_api.entity.Product;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +17,13 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Properties;
 
 @SpringBootTest
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 @Transactional
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class OrderDAOImplTest {
+public class OrderLineDAOImplTest {
     @Autowired
     private OrderDAO orderDAO;
     @Autowired
@@ -39,129 +35,7 @@ public class OrderDAOImplTest {
     @Autowired
     private ModelMapper modelMapper;
     @Test
-    public void CustomerDAO_getAllOrder_ReturnOrders() throws Exception {
-
-        Customer customer1 = Customer.builder()
-                .fullName("CustomerOne")
-                .email("email@email.com")
-                .telephone("+37255667744")
-                .build();
-
-        CustomerDTO customerDTO = modelMapper.map(customer1, CustomerDTO.class);
-        customerDAO.saveCustomer(customerDTO);
-        CustomerDTO retrievedCustomer = customerDAO.getCustomer(1);
-        Customer customer = modelMapper.map(retrievedCustomer, Customer.class);
-
-        OrderDTO order1 = OrderDTO.builder()
-                .customerId(customer)
-                .submissionDate("09-09-2023")
-                .build();
-
-        OrderDTO order2 = OrderDTO.builder()
-                .customerId(customer)
-                .submissionDate("10-09-2023")
-                .build();
-
-
-
-        orderDAO.saveOrder(order1);
-        orderDAO.saveOrder(order2);
-
-        List<OrderDTO> allOrders = orderDAO.getAllOrders();
-        Assertions.assertThat(allOrders.size()).isEqualTo(2);
-    }
-    @Test
-    public void OrderDAO_saveOrder_ReturnOrder() throws Exception {
-
-        Customer customer1 = Customer.builder()
-                .fullName("CustomerOne")
-                .email("email@email.com")
-                .telephone("+37255667744")
-                .build();
-
-        CustomerDTO customerDTO = modelMapper.map(customer1, CustomerDTO.class);
-        customerDAO.saveCustomer(customerDTO);
-
-        CustomerDTO retrievedCustomer = customerDAO.getCustomer(1);
-        Customer customer = modelMapper.map(retrievedCustomer, Customer.class);
-
-        OrderDTO order1 = OrderDTO.builder()
-                .customerId(customer)
-                .submissionDate("09-09-2023")
-                .build();
-
-
-        orderDAO.saveOrder(order1);
-
-        OrderDTO retrievedOrder = orderDAO.getOrder(1);
-        Assertions.assertThat(retrievedOrder.getOrderId()).isEqualTo(1);
-    }
-    @Test
-    public void OrderDAO_getOrder_ReturnOrder() throws Exception {
-
-        Customer customer1 = Customer.builder()
-                .fullName("CustomerOne")
-                .email("email@email.com")
-                .telephone("+37255667744")
-                .build();
-
-        CustomerDTO customerDTO = modelMapper.map(customer1, CustomerDTO.class);
-        customerDAO.saveCustomer(customerDTO);
-
-        CustomerDTO retrievedCustomer = customerDAO.getCustomer(1);
-        Customer customer = modelMapper.map(retrievedCustomer, Customer.class);
-
-        OrderDTO order1 = OrderDTO.builder()
-                .customerId(customer)
-                .submissionDate("09-09-2023")
-                .build();
-
-
-        orderDAO.saveOrder(order1);
-
-        OrderDTO retrievedOrder = orderDAO.getOrder(1);
-        Assertions.assertThat(retrievedOrder.getOrderId()).isEqualTo(1);
-    }
-    @Test
-    public void OrderDAO_getAllOrdersByDate_ReturnOrderByDate() throws Exception {
-
-        Customer customer1 = Customer.builder()
-                .fullName("CustomerOne")
-                .email("email@email.com")
-                .telephone("+37255667744")
-                .build();
-
-        CustomerDTO customerDTO = modelMapper.map(customer1, CustomerDTO.class);
-        customerDAO.saveCustomer(customerDTO);
-
-        CustomerDTO retrievedCustomer = customerDAO.getCustomer(1);
-        Customer customer = modelMapper.map(retrievedCustomer, Customer.class);
-
-        OrderDTO order1 = OrderDTO.builder()
-                .customerId(customer)
-                .submissionDate("2023-09-09")
-                .build();
-
-        OrderDTO order2 = OrderDTO.builder()
-                .customerId(customer)
-                .submissionDate("2023-09-09")
-                .build();
-
-
-        orderDAO.saveOrder(order1);
-        orderDAO.saveOrder(order2);
-
-        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date date = sdf1.parse("2023-09-09");
-        java.sql.Date sqlStartDate = new java.sql.Date(date.getTime());
-
-        List<OrderDTO> allOrders = orderDAO.getAllOrdersByDate(sqlStartDate);
-
-        Assertions.assertThat(allOrders.size()).isEqualTo(2);
-    }
-    @Test
-    public void OrderDAO_getAllOrdersByProduct_ReturnOrderByProduct() throws Exception {
-
+    public void OrderLineDAO_getAllOrderLines_ReturnAllOrderLines() throws Exception {
         Customer customer1 = Customer.builder()
                 .fullName("CustomerOne")
                 .email("email@email.com")
@@ -186,45 +60,17 @@ public class OrderDAOImplTest {
         Product DBProduct = modelMapper.map(retrievedProduct, Product.class);
 
         OrderLineDTO orderLineDTO = OrderLineDTO.builder().orderId(DBOrder).productId(DBProduct).quantity(10).build();
+        OrderLineDTO orderLineDTO2 = OrderLineDTO.builder().orderId(DBOrder).productId(DBProduct).quantity(50).build();
+
         orderLineDAO.saveOrderLine(orderLineDTO);
-        List<OrderDTO> allOrders = orderDAO.getAllOrdersByProduct(DBProduct);
-
-        Assertions.assertThat(allOrders.size()).isEqualTo(1);
-    }
-
-    @Test
-    public void OrderDAO_getAllOrdersByCustomer_ReturnOrderByCustomer() throws Exception {
-
-        Customer customer1 = Customer.builder()
-                .fullName("CustomerOne")
-                .email("email@email.com")
-                .telephone("+37255667744")
-                .build();
-        CustomerDTO customerDTO = modelMapper.map(customer1, CustomerDTO.class);
-        customerDAO.saveCustomer(customerDTO);
-        CustomerDTO retrievedCustomer = customerDAO.getCustomer(1);
-        Customer DBcustomer = modelMapper.map(retrievedCustomer, Customer.class);
-
-        OrderDTO order1 = OrderDTO.builder()
-                .customerId(DBcustomer)
-                .submissionDate("09-09-2023")
-                .build();
-        orderDAO.saveOrder(order1);
-
-        OrderDTO order2 = OrderDTO.builder()
-                .customerId(DBcustomer)
-                .submissionDate("09-09-2023")
-                .build();
-        orderDAO.saveOrder(order2);
-
-
-        List<OrderDTO> allOrders = orderDAO.getAllOrdersByCustomer(retrievedCustomer);
+        orderLineDAO.saveOrderLine(orderLineDTO2);
+        List<OrderLineDTO> allOrders = orderLineDAO.getAllOrderLines();
 
         Assertions.assertThat(allOrders.size()).isEqualTo(2);
     }
-    @Test
-    public void OrderDAO_deleteOrder_ReturnNone() throws Exception {
 
+    @Test
+    public void OrderLineDAO_saveOrderLine_ReturnSavedOrderLine() throws Exception {
         Customer customer1 = Customer.builder()
                 .fullName("CustomerOne")
                 .email("email@email.com")
@@ -240,19 +86,89 @@ public class OrderDAOImplTest {
                 .submissionDate("09-09-2023")
                 .build();
         orderDAO.saveOrder(order1);
+        OrderDTO retrievedOrder = orderDAO.getOrder(1);
+        Order DBOrder = modelMapper.map(retrievedOrder, Order.class);
 
-        orderDAO.deleteOrder(1);
+        ProductDTO product1 = ProductDTO.builder().productName("Tea").skuCode("EU883311").unitPrice("12").build();
+        productDAO.saveProduct(product1);
+        ProductDTO retrievedProduct = productDAO.getProduct(1);
+        Product DBProduct = modelMapper.map(retrievedProduct, Product.class);
 
+        OrderLineDTO orderLineDTO = OrderLineDTO.builder().orderId(DBOrder).productId(DBProduct).quantity(10).build();
 
-        List<OrderDTO> allOrders = orderDAO.getAllOrders();
+        orderLineDAO.saveOrderLine(orderLineDTO);
+        OrderLineDTO orderLine = orderLineDAO.getOrderLine(1);
 
-        Assertions.assertThat(allOrders.size()).isEqualTo(0);
+        Assertions.assertThat(orderLine).isNotNull();
     }
 
+    @Test
+    public void OrderLineDAO_getOrderLine_ReturnOrderLine() throws Exception {
+        Customer customer1 = Customer.builder()
+                .fullName("CustomerOne")
+                .email("email@email.com")
+                .telephone("+37255667744")
+                .build();
+        CustomerDTO customerDTO = modelMapper.map(customer1, CustomerDTO.class);
+        customerDAO.saveCustomer(customerDTO);
+        CustomerDTO retrievedCustomer = customerDAO.getCustomer(1);
+        Customer DBcustomer = modelMapper.map(retrievedCustomer, Customer.class);
 
+        OrderDTO order1 = OrderDTO.builder()
+                .customerId(DBcustomer)
+                .submissionDate("09-09-2023")
+                .build();
+        orderDAO.saveOrder(order1);
+        OrderDTO retrievedOrder = orderDAO.getOrder(1);
+        Order DBOrder = modelMapper.map(retrievedOrder, Order.class);
 
+        ProductDTO product1 = ProductDTO.builder().productName("Tea").skuCode("EU883311").unitPrice("12").build();
+        productDAO.saveProduct(product1);
+        ProductDTO retrievedProduct = productDAO.getProduct(1);
+        Product DBProduct = modelMapper.map(retrievedProduct, Product.class);
 
+        OrderLineDTO orderLineDTO = OrderLineDTO.builder().orderId(DBOrder).productId(DBProduct).quantity(10).build();
 
+        orderLineDAO.saveOrderLine(orderLineDTO);
+        OrderLineDTO orderLine = orderLineDAO.getOrderLine(1);
 
+        Assertions.assertThat(orderLine).isNotNull();
+    }
+    @Test
+    public void OrderLineDAO_deleteOrderLine_ReturnOrderLine() throws Exception {
+        Customer customer1 = Customer.builder()
+                .fullName("CustomerOne")
+                .email("email@email.com")
+                .telephone("+37255667744")
+                .build();
+        CustomerDTO customerDTO = modelMapper.map(customer1, CustomerDTO.class);
+        customerDAO.saveCustomer(customerDTO);
+        CustomerDTO retrievedCustomer = customerDAO.getCustomer(1);
+        Customer DBcustomer = modelMapper.map(retrievedCustomer, Customer.class);
+
+        OrderDTO order1 = OrderDTO.builder()
+                .customerId(DBcustomer)
+                .submissionDate("09-09-2023")
+                .build();
+        orderDAO.saveOrder(order1);
+        OrderDTO retrievedOrder = orderDAO.getOrder(1);
+        Order DBOrder = modelMapper.map(retrievedOrder, Order.class);
+
+        ProductDTO product1 = ProductDTO.builder().productName("Tea").skuCode("EU883311").unitPrice("12").build();
+        productDAO.saveProduct(product1);
+        ProductDTO retrievedProduct = productDAO.getProduct(1);
+        Product DBProduct = modelMapper.map(retrievedProduct, Product.class);
+
+        OrderLineDTO orderLineDTO = OrderLineDTO.builder().orderId(DBOrder).productId(DBProduct).quantity(10).build();
+
+        orderLineDAO.saveOrderLine(orderLineDTO);
+        OrderLineDTO orderLine = orderLineDAO.getOrderLine(1);
+
+        orderLineDAO.deleteOrderLine(orderLine.getOrderLineId());
+
+        OrderLineDTO orderLine2 = orderLineDAO.getOrderLine(orderLine.getOrderLineId());
+
+        Assertions.assertThat(orderLine2).isNull();
+    }
 
 }

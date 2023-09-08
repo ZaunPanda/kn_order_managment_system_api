@@ -1,6 +1,7 @@
 package kn.kn_order_managment_system_api.dao;
 
 import jakarta.persistence.*;
+import kn.kn_order_managment_system_api.dto.OrderLineDTO;
 import kn.kn_order_managment_system_api.dto.ProductDTO;
 import kn.kn_order_managment_system_api.entity.Product;
 import org.modelmapper.ModelMapper;
@@ -29,13 +30,18 @@ public class ProductDAOimpl implements ProductDAO {
     @Override
     public ProductDTO getProduct(int product_id) {
         Product DBproduct =  entityManager.find(Product.class,product_id);
-        ProductDTO DBproductDTO = modelMapper.map(DBproduct, ProductDTO.class);
-        return DBproductDTO;
+        if (DBproduct != null) {
+            return modelMapper.map(DBproduct, ProductDTO.class);
+        } else {
+            return null;
+        }
     }
 
     @Override
     public void deleteProduct(int product_id) {
         Query query = entityManager.createQuery("delete from Product where productId=:product_id");
+        query.setParameter("product_id", product_id);
         query.executeUpdate();
+        entityManager.clear();
     }
 }

@@ -68,5 +68,6 @@ public class OrderDAOImpl implements OrderDAO{
         Query query = entityManager.createQuery("delete from Order where orderId=:order_id");
         query.setParameter("order_id", order_id);
         query.executeUpdate();
+        entityManager.clear();
     }
 }

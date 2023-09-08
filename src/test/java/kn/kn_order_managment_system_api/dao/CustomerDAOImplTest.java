@@ -84,8 +84,8 @@ public class CustomerDAOImplTest {
         customerDAO.saveCustomer(customer);
         customerDAO.deleteCustomer(1);
 
-        List<CustomerDTO> allCustomers = customerDAO.getAllCustomers();
-        Assertions.assertThat(allCustomers.size()).isEqualTo(0);
+        CustomerDTO customerDTO = customerDAO.getCustomer(1);
+        Assertions.assertThat(customerDTO).isNull();
 
     }
 
