@@ -32,9 +32,14 @@ public class OrderDAOImpl implements OrderDAO{
 
     @Override
     public OrderDTO getOrder(int order_id) {
-        Order order =  entityManager.find(Order.class,order_id);
-        OrderDTO newOrder = modelMapper.map(order, OrderDTO.class);
-        return newOrder;
+        Order order = entityManager.find(Order.class, order_id);
+        if (order != null) {
+            OrderDTO newOrder = modelMapper.map(order, OrderDTO.class);
+            return newOrder;
+        } else {
+            return null;
+
+        }
     }
 
     @Override

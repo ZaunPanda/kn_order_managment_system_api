@@ -1,17 +1,10 @@
 package kn.kn_order_managment_system_api.RESTcontroller;
 
-import kn.kn_order_managment_system_api.dto.CustomerDTO;
 import kn.kn_order_managment_system_api.dto.OrderDTO;
-import kn.kn_order_managment_system_api.dto.OrderLineDTO;
-import kn.kn_order_managment_system_api.dto.ProductDTO;
 import kn.kn_order_managment_system_api.entity.Customer;
 import kn.kn_order_managment_system_api.entity.Product;
-import kn.kn_order_managment_system_api.services.CustomerService;
-import kn.kn_order_managment_system_api.services.OrderLineService;
 import kn.kn_order_managment_system_api.services.OrderService;
-import kn.kn_order_managment_system_api.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
@@ -30,15 +23,20 @@ public class MyRESTOrderController {
         return orderService.getAllOrders();
     }
 
+    @RequestMapping("/orders/{id}")
+    public OrderDTO getOrder(@PathVariable int id) {
+        return orderService.getOrder(id);
+    }
+
     @PostMapping("/orders")
-    public OrderDTO addOrder(@RequestBody OrderDTO order) {
+    public OrderDTO saveOrder(@RequestBody OrderDTO order) {
         Timestamp instant = Timestamp.from(Instant.now());
         order.setSubmissionDate(instant.toString());
         orderService.saveOrder(order);
         return order;
     }
     @RequestMapping("/orders/by-date/{text_date}")
-    public List<OrderDTO> showAllOrdersByDate(@PathVariable String text_date) throws Exception {
+    public List<OrderDTO> getAllOrdersByDate(@PathVariable String text_date) throws Exception {
         if (text_date == null) {
             throw new Exception("Add date to link");
         }
@@ -52,6 +50,7 @@ public class MyRESTOrderController {
 
         return orderService.getAllOrdersByProduct(product);
     }
+    //TODO change product and customer class to id, not full class
     @RequestMapping("/orders/by-customer")
     public List<OrderDTO> showAllOrdersByCustomer(@RequestBody Customer customer) throws Exception {
         if (customer.getRegistrationCode() == 0) {
