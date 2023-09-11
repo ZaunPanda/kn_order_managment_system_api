@@ -15,13 +15,12 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
     private int orderId;
-    @ManyToOne
     @JoinColumn(name = "customer_id")
-    private Customer customerId;
+    private int customerId;
     @Column(name = "submission_date")
     private String submissionDate;
 
-    public Order(Customer customerId, String submissionDate) {
+    public Order(int customerId, String submissionDate) {
         this.customerId = customerId;
         this.submissionDate = submissionDate;
     }
@@ -34,11 +33,11 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public Customer getCustomerId() {
+    public int getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(Customer customerId) {
+    public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
 

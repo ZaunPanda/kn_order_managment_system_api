@@ -2,7 +2,6 @@ package kn.kn_order_managment_system_api.RESTController;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kn.kn_order_managment_system_api.RESTcontroller.MyRESTCustomerController;
 import kn.kn_order_managment_system_api.RESTcontroller.MyRESTOrderController;
 import kn.kn_order_managment_system_api.dao.CustomerDAO;
 import kn.kn_order_managment_system_api.dao.OrderDAO;
@@ -15,9 +14,7 @@ import kn.kn_order_managment_system_api.dto.ProductDTO;
 import kn.kn_order_managment_system_api.entity.Customer;
 import kn.kn_order_managment_system_api.entity.Order;
 import kn.kn_order_managment_system_api.entity.Product;
-import kn.kn_order_managment_system_api.services.CustomerService;
 import kn.kn_order_managment_system_api.services.OrderService;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +30,6 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -51,8 +47,6 @@ public class MyRESTOrderControllerTest {
     private ProductDAO productDAO;
     @MockBean
     private OrderLineDAO orderLineDAO;
-    @MockBean
-    private CustomerService customerService;
     @MockBean
     private OrderService orderService;
     @MockBean
@@ -74,12 +68,12 @@ public class MyRESTOrderControllerTest {
         Customer customer = modelMapper.map(retrievedCustomer, Customer.class);
 
         OrderDTO order1 = OrderDTO.builder()
-                .customerId(customer)
+                .customerId(1)
                 .submissionDate("09-09-2023")
                 .build();
 
         OrderDTO order2 = OrderDTO.builder()
-                .customerId(customer)
+                .customerId(1)
                 .submissionDate("10-09-2023")
                 .build();
 
@@ -99,19 +93,11 @@ public class MyRESTOrderControllerTest {
 
     @Test
     public void MyRESTOrderController_getOrder_ReturnOrder() throws Exception{
-        Customer customer1 = Customer.builder()
-                .fullName("CustomerOne")
-                .email("email@email.com")
-                .telephone("+37255667744")
-                .build();
 
-        CustomerDTO customerDTO = modelMapper.map(customer1, CustomerDTO.class);
-        customerDAO.saveCustomer(customerDTO);
-        CustomerDTO retrievedCustomer = customerDAO.getCustomer(1);
-        Customer customer = modelMapper.map(retrievedCustomer, Customer.class);
+
 
         OrderDTO order1 = OrderDTO.builder()
-                .customerId(customer)
+                .customerId(1)
                 .submissionDate("09-09-2023")
                 .build();
         order1.setOrderId(1);
@@ -128,19 +114,9 @@ public class MyRESTOrderControllerTest {
 
     @Test
     public void MyRESTOrderController_saveOrder_ReturnOrder() throws Exception{
-        Customer customer1 = Customer.builder()
-                .fullName("CustomerOne")
-                .email("email@email.com")
-                .telephone("+37255667744")
-                .build();
-
-        CustomerDTO customerDTO = modelMapper.map(customer1, CustomerDTO.class);
-        customerDAO.saveCustomer(customerDTO);
-        CustomerDTO retrievedCustomer = customerDAO.getCustomer(1);
-        Customer customer = modelMapper.map(retrievedCustomer, Customer.class);
 
         OrderDTO order1 = OrderDTO.builder()
-                .customerId(customer)
+                .customerId(1)
                 .submissionDate("09-09-2023")
                 .build();
         order1.setOrderId(1);
@@ -170,12 +146,12 @@ public class MyRESTOrderControllerTest {
         Customer customer = modelMapper.map(retrievedCustomer, Customer.class);
 
         OrderDTO order1 = OrderDTO.builder()
-                .customerId(customer)
+                .customerId(1)
                 .submissionDate("2023-09-09")
                 .build();
 
         OrderDTO order2 = OrderDTO.builder()
-                .customerId(customer)
+                .customerId(1)
                 .submissionDate("2023-09-09")
                 .build();
 
@@ -212,7 +188,7 @@ public class MyRESTOrderControllerTest {
         Customer DBcustomer = modelMapper.map(retrievedCustomer, Customer.class);
 
         OrderDTO order1 = OrderDTO.builder()
-                .customerId(DBcustomer)
+                .customerId(1)
                 .submissionDate("09-09-2023")
                 .build();
         orderDAO.saveOrder(order1);
@@ -224,14 +200,14 @@ public class MyRESTOrderControllerTest {
         ProductDTO retrievedProduct = productDAO.getProduct(1);
         Product DBProduct = modelMapper.map(retrievedProduct, Product.class);
 
-        OrderLineDTO orderLineDTO = OrderLineDTO.builder().orderId(DBOrder).productId(DBProduct).quantity(10).build();
+        OrderLineDTO orderLineDTO = OrderLineDTO.builder().orderId(1).productId(1).quantity(10).build();
         orderLineDAO.saveOrderLine(orderLineDTO);
-        List<OrderDTO> allOrders = orderDAO.getAllOrdersByProduct(DBProduct);
+        List<OrderDTO> allOrders = orderDAO.getAllOrdersByProduct(1);
 
 
-        given(orderService.getAllOrdersByProduct(DBProduct)).willReturn(allOrders);
+        given(orderService.getAllOrdersByProduct(1)).willReturn(allOrders);
 
-        ResultActions response = mockMvc.perform(get("/api/orders/by-product",DBProduct));
+        ResultActions response = mockMvc.perform(get("/api/orders//by-product/{productId}",1));
         response.andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(jsonPath("$.size()",
@@ -250,12 +226,12 @@ public class MyRESTOrderControllerTest {
         customer1.setRegistrationCode(1);
 
         OrderDTO order1 = OrderDTO.builder()
-                .customerId(customer1)
+                .customerId(1)
                 .submissionDate("09-09-2023")
                 .build();
 
         OrderDTO order2 = OrderDTO.builder()
-                .customerId(customer1)
+                .customerId(1)
                 .submissionDate("09-09-2023")
                 .build();
 
@@ -264,9 +240,9 @@ public class MyRESTOrderControllerTest {
 
 
 
-        given(orderService.getAllOrdersByCustomer(customer1)).willReturn(allOrdersByCustomer);
+        given(orderService.getAllOrdersByCustomer(1)).willReturn(allOrdersByCustomer);
 
-        ResultActions response = mockMvc.perform(get("/api/orders/by-customer",customer1));
+        ResultActions response = mockMvc.perform(get("/api/orders/by-customer/{customerId}",1));
         response.andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(jsonPath("$.size()",
@@ -274,61 +250,27 @@ public class MyRESTOrderControllerTest {
 
 
     }
+    @Test
+    public void MyRESTOrderController_deleteOrder_ReturnNothing() throws Exception {
+        OrderDTO order1 = OrderDTO.builder()
+                .customerId(1)
+                .submissionDate("09-09-2023")
+                .build();
+        order1.setOrderId(1);
 
+        ResultActions response = mockMvc.perform(post("/api/orders")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(order1)));
 
-//    @Test
-//    public void MyRESTController_getCustomer_ReturnAllCustomers() throws Exception{
-//        CustomerDTO customerDTO1 = CustomerDTO.builder()
-//                .email("email@email.com")
-//                .fullName("TestCustomer")
-//                .telephone("+37266445533").build();
-//        customerDTO1.setRegistrationCode(1);
-//        given(customerService.getCustomer(customerDTO1.getRegistrationCode()))
-//                .willReturn(customerDTO1);
-//
-//        ResultActions response = mockMvc.perform(get("/api/customers/{id}",1));
-//        response.andExpect(status().isOk())
-//                .andDo(print())
-//                .andExpect(jsonPath("$.fullName", is(customerDTO1.getFullName())));
-//    }
-//    @Test
-//    public void MyRESTController_saveCustomer_ReturnCustomer() throws Exception{
-//        CustomerDTO customerDTO1 = CustomerDTO.builder()
-//                .email("email@email.com")
-//                .fullName("TestCustomer")
-//                .telephone("+37266445533").build();
-//        customerDTO1.setRegistrationCode(1);
-//
-//        mockMvc.perform(post("/api/customers")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(objectMapper.writeValueAsString(customerDTO1)));
-//
-//        verify(customerService).saveCustomer(customerDTO1);
-//
-//    }
-//    @Test
-//    public void MyRESTController_deleteCustomer_Return200() throws Exception{
-//        CustomerDTO customerDTO1 = CustomerDTO.builder()
-//                .email("email@email.com")
-//                .fullName("TestCustomer")
-//                .telephone("+37266445533").build();
-//        customerDTO1.setRegistrationCode(1);
-//
-//        ResultActions response = mockMvc.perform(post("/api/customers")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(objectMapper.writeValueAsString(customerDTO1)));
-//
-//        response.andExpect(status().isCreated());
-//
-//        String createdCustomerJson = response.andReturn().getResponse().getContentAsString();
-//        CustomerDTO createdCustomer = objectMapper.readValue(createdCustomerJson, CustomerDTO.class);
-//
-//        ResultActions deleteResponse = mockMvc.perform(delete
-//                ("/api/customers/{id}",
-//                        createdCustomer.getRegistrationCode()));
-//
-//        deleteResponse.andExpect(status().isOk());
-//
-//
-//    }
+        response.andExpect(status().isCreated());
+
+        String createdOrderJson = response.andReturn().getResponse().getContentAsString();
+        OrderDTO createdOrder = objectMapper.readValue(createdOrderJson, OrderDTO.class);
+
+        ResultActions deleteResponse = mockMvc.perform(delete
+                ("/api/orders/delete/{orderId}",
+                        createdOrder.getOrderId()));
+
+        deleteResponse.andExpect(status().isOk());
+    }
 }

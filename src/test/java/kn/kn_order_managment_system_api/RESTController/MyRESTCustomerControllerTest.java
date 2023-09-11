@@ -6,9 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import kn.kn_order_managment_system_api.RESTcontroller.MyRESTCustomerController;
 import kn.kn_order_managment_system_api.dto.CustomerDTO;
 import kn.kn_order_managment_system_api.services.CustomerService;
-import kn.kn_order_managment_system_api.services.OrderLineService;
-import kn.kn_order_managment_system_api.services.OrderService;
-import kn.kn_order_managment_system_api.services.ProductService;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,12 +101,12 @@ public class MyRESTCustomerControllerTest {
 
         response.andExpect(status().isCreated());
 
-        String createdCustomerJson = response.andReturn().getResponse().getContentAsString();
-        CustomerDTO createdCustomer = objectMapper.readValue(createdCustomerJson, CustomerDTO.class);
+        String createdOrderJson = response.andReturn().getResponse().getContentAsString();
+        CustomerDTO createdOrder = objectMapper.readValue(createdOrderJson, CustomerDTO.class);
 
         ResultActions deleteResponse = mockMvc.perform(delete
-                ("/api/customers/{id}",
-                        createdCustomer.getRegistrationCode()));
+                ("/api/customers_delete/{id}",
+                        createdOrder.getRegistrationCode()));
 
         deleteResponse.andExpect(status().isOk());
 

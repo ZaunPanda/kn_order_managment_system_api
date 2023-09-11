@@ -15,17 +15,15 @@ public class OrderLine {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "orderline_id")
     private int orderLineId;
-    @ManyToOne
     @JoinColumn(name = "order_id")
-    private Order orderId;
-    @ManyToOne
+    private int orderId;
     @JoinColumn(name = "product_id")
-    private Product productId;
+    private int productId;
 
     @JoinColumn(name = "quantity")
     private int quantity;
 
-    public OrderLine(Order orderId, Product product_id, int quantity) {
+    public OrderLine(int orderId, int product_id, int quantity) {
         this.orderId = orderId;
         this.productId = product_id;
         this.quantity = quantity;
@@ -39,19 +37,19 @@ public class OrderLine {
         this.orderLineId = orderLineId;
     }
 
-    public Order getOrderId() {
+    public int getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Order orderId) {
+    public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
 
-    public Product getProductId() {
+    public int getProductId() {
         return productId;
     }
 
-    public void setProductId(Product productId) {
+    public void setProductId(int productId) {
         this.productId = productId;
     }
 
