@@ -3,7 +3,6 @@ package kn.kn_order_managment_system_api.services;
 import jakarta.transaction.Transactional;
 import kn.kn_order_managment_system_api.dao.OrderLineDAO;
 import kn.kn_order_managment_system_api.dto.OrderLineDTO;
-import kn.kn_order_managment_system_api.entity.OrderLine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -2,9 +2,7 @@ package kn.kn_order_managment_system_api.dao;
 
 import jakarta.persistence.*;
 import jakarta.persistence.Query;
-import kn.kn_order_managment_system_api.dto.CustomerDTO;
 import kn.kn_order_managment_system_api.dto.OrderLineDTO;
-import kn.kn_order_managment_system_api.entity.Order;
 import kn.kn_order_managment_system_api.entity.OrderLine;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

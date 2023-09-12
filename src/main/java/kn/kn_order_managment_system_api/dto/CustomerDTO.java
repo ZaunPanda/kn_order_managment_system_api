@@ -2,7 +2,6 @@ package kn.kn_order_managment_system_api.dto;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 
 @Builder

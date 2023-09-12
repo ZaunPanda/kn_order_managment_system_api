@@ -3,7 +3,6 @@ package kn.kn_order_managment_system_api.dao;
 import jakarta.transaction.Transactional;
 import kn.kn_order_managment_system_api.dto.CustomerDTO;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
