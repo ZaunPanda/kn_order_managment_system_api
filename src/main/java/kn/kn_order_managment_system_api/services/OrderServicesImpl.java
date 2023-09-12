@@ -2,10 +2,7 @@ package kn.kn_order_managment_system_api.services;
 
 import jakarta.transaction.Transactional;
 import kn.kn_order_managment_system_api.dao.OrderDAO;
-import kn.kn_order_managment_system_api.dto.CustomerDTO;
 import kn.kn_order_managment_system_api.dto.OrderDTO;
-import kn.kn_order_managment_system_api.entity.Customer;
-import kn.kn_order_managment_system_api.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,19 +40,14 @@ public class OrderServicesImpl implements OrderService{
 
     @Override
     @Transactional
-    public List<OrderDTO> getAllOrdersByProduct(Product product) {
+    public List<OrderDTO> getAllOrdersByProduct(int productId) {
 
-        return orderDAO.getAllOrdersByProduct(product);
-    }
-
-    @Override
-    public List<OrderDTO> getAllOrdersByCustomer(Customer customerId) {
-        return null;
+        return orderDAO.getAllOrdersByProduct(productId);
     }
 
     @Override
     @Transactional
-    public List<OrderDTO> getAllOrdersByCustomer(CustomerDTO customerId) {
+    public List<OrderDTO> getAllOrdersByCustomer(int customerId) {
         return orderDAO.getAllOrdersByCustomer(customerId);
     }
 

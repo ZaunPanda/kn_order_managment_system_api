@@ -28,7 +28,6 @@ public class CustomerDAOImpl implements CustomerDAO{
     public Customer saveCustomer(CustomerDTO customerDTO) {
         Customer newCustomer = modelMapper.map(customerDTO, Customer.class);
         entityManager.persist(newCustomer);
-
         return newCustomer;
     }
 

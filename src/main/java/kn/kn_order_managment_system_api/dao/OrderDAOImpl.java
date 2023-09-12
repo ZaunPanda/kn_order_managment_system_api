@@ -1,11 +1,11 @@
 package kn.kn_order_managment_system_api.dao;
 
 import jakarta.persistence.*;
-import kn.kn_order_managment_system_api.dto.CustomerDTO;
+
 import kn.kn_order_managment_system_api.dto.OrderDTO;
-import kn.kn_order_managment_system_api.entity.Customer;
+
 import kn.kn_order_managment_system_api.entity.Order;
-import kn.kn_order_managment_system_api.entity.Product;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -51,19 +51,18 @@ public class OrderDAOImpl implements OrderDAO{
     }
 
     @Override
-    public List<OrderDTO> getAllOrdersByProduct(Product product) {
+    public List<OrderDTO> getAllOrdersByProduct(int productId) {
         Query query = entityManager.createQuery("SELECT orderId FROM OrderLine WHERE productId = :product");
-        query.setParameter("product", product);
+        query.setParameter("product", productId);
         List<OrderDTO> allOrdersByProduct = query.getResultList();
 
         return allOrdersByProduct;
     }
 
     @Override
-    public List<OrderDTO> getAllOrdersByCustomer(CustomerDTO customerDTO) {
-        Customer customer = modelMapper.map(customerDTO, Customer.class);
+    public List<OrderDTO> getAllOrdersByCustomer(int customerId) {
         Query query = entityManager.createQuery("FROM Order WHERE customerId = :customer");
-        query.setParameter("customer", customer);
+        query.setParameter("customer", customerId);
         List<OrderDTO> allOrdersByCustomer = query.getResultList();
         return allOrdersByCustomer;
     }

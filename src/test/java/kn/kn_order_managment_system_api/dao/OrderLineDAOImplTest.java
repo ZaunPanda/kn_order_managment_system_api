@@ -47,7 +47,7 @@ public class OrderLineDAOImplTest {
         Customer DBcustomer = modelMapper.map(retrievedCustomer, Customer.class);
 
         OrderDTO order1 = OrderDTO.builder()
-                .customerId(DBcustomer)
+                .customerId(DBcustomer.getRegistrationCode())
                 .submissionDate("09-09-2023")
                 .build();
         orderDAO.saveOrder(order1);
@@ -59,8 +59,8 @@ public class OrderLineDAOImplTest {
         ProductDTO retrievedProduct = productDAO.getProduct(1);
         Product DBProduct = modelMapper.map(retrievedProduct, Product.class);
 
-        OrderLineDTO orderLineDTO = OrderLineDTO.builder().orderId(DBOrder).productId(DBProduct).quantity(10).build();
-        OrderLineDTO orderLineDTO2 = OrderLineDTO.builder().orderId(DBOrder).productId(DBProduct).quantity(50).build();
+        OrderLineDTO orderLineDTO = OrderLineDTO.builder().orderId(DBOrder.getOrderId()).productId(DBProduct.getProductId()).quantity(10).build();
+        OrderLineDTO orderLineDTO2 = OrderLineDTO.builder().orderId(DBOrder.getOrderId()).productId(DBProduct.getProductId()).quantity(50).build();
 
         orderLineDAO.saveOrderLine(orderLineDTO);
         orderLineDAO.saveOrderLine(orderLineDTO2);
@@ -82,7 +82,7 @@ public class OrderLineDAOImplTest {
         Customer DBcustomer = modelMapper.map(retrievedCustomer, Customer.class);
 
         OrderDTO order1 = OrderDTO.builder()
-                .customerId(DBcustomer)
+                .customerId(DBcustomer.getRegistrationCode())
                 .submissionDate("09-09-2023")
                 .build();
         orderDAO.saveOrder(order1);
@@ -94,7 +94,7 @@ public class OrderLineDAOImplTest {
         ProductDTO retrievedProduct = productDAO.getProduct(1);
         Product DBProduct = modelMapper.map(retrievedProduct, Product.class);
 
-        OrderLineDTO orderLineDTO = OrderLineDTO.builder().orderId(DBOrder).productId(DBProduct).quantity(10).build();
+        OrderLineDTO orderLineDTO = OrderLineDTO.builder().orderId(DBOrder.getOrderId()).productId(DBProduct.getProductId()).quantity(10).build();
 
         orderLineDAO.saveOrderLine(orderLineDTO);
         OrderLineDTO orderLine = orderLineDAO.getOrderLine(1);
@@ -115,7 +115,7 @@ public class OrderLineDAOImplTest {
         Customer DBcustomer = modelMapper.map(retrievedCustomer, Customer.class);
 
         OrderDTO order1 = OrderDTO.builder()
-                .customerId(DBcustomer)
+                .customerId(DBcustomer.getRegistrationCode())
                 .submissionDate("09-09-2023")
                 .build();
         orderDAO.saveOrder(order1);
@@ -127,7 +127,7 @@ public class OrderLineDAOImplTest {
         ProductDTO retrievedProduct = productDAO.getProduct(1);
         Product DBProduct = modelMapper.map(retrievedProduct, Product.class);
 
-        OrderLineDTO orderLineDTO = OrderLineDTO.builder().orderId(DBOrder).productId(DBProduct).quantity(10).build();
+        OrderLineDTO orderLineDTO = OrderLineDTO.builder().orderId(DBOrder.getOrderId()).productId(DBProduct.getProductId()).quantity(10).build();
 
         orderLineDAO.saveOrderLine(orderLineDTO);
         OrderLineDTO orderLine = orderLineDAO.getOrderLine(1);
@@ -147,7 +147,7 @@ public class OrderLineDAOImplTest {
         Customer DBcustomer = modelMapper.map(retrievedCustomer, Customer.class);
 
         OrderDTO order1 = OrderDTO.builder()
-                .customerId(DBcustomer)
+                .customerId(DBcustomer.getRegistrationCode())
                 .submissionDate("09-09-2023")
                 .build();
         orderDAO.saveOrder(order1);
@@ -159,7 +159,7 @@ public class OrderLineDAOImplTest {
         ProductDTO retrievedProduct = productDAO.getProduct(1);
         Product DBProduct = modelMapper.map(retrievedProduct, Product.class);
 
-        OrderLineDTO orderLineDTO = OrderLineDTO.builder().orderId(DBOrder).productId(DBProduct).quantity(10).build();
+        OrderLineDTO orderLineDTO = OrderLineDTO.builder().orderId(DBOrder.getOrderId()).productId(DBProduct.getProductId()).quantity(10).build();
 
         orderLineDAO.saveOrderLine(orderLineDTO);
         OrderLineDTO orderLine = orderLineDAO.getOrderLine(1);

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CustomerService {
     public List<CustomerDTO> getAllCustomers();
-    public void saveCustomer(CustomerDTO customer);
+    public CustomerDTO saveCustomer(CustomerDTO customer);
     public CustomerDTO getCustomer(int customer_id) throws Exception;
     void  deleteCustomer(int customer_id) throws Exception;
 }

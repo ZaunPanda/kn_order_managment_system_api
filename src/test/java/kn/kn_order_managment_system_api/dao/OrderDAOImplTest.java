@@ -9,7 +9,6 @@ import kn.kn_order_managment_system_api.entity.Customer;
 import kn.kn_order_managment_system_api.entity.Order;
 import kn.kn_order_managment_system_api.entity.Product;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +17,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Properties;
 
 @SpringBootTest
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
@@ -53,12 +50,12 @@ public class OrderDAOImplTest {
         Customer customer = modelMapper.map(retrievedCustomer, Customer.class);
 
         OrderDTO order1 = OrderDTO.builder()
-                .customerId(customer)
+                .customerId(customer.getRegistrationCode())
                 .submissionDate("09-09-2023")
                 .build();
 
         OrderDTO order2 = OrderDTO.builder()
-                .customerId(customer)
+                .customerId(customer.getRegistrationCode())
                 .submissionDate("10-09-2023")
                 .build();
 
@@ -86,7 +83,7 @@ public class OrderDAOImplTest {
         Customer customer = modelMapper.map(retrievedCustomer, Customer.class);
 
         OrderDTO order1 = OrderDTO.builder()
-                .customerId(customer)
+                .customerId(customer.getRegistrationCode())
                 .submissionDate("09-09-2023")
                 .build();
 
@@ -112,7 +109,7 @@ public class OrderDAOImplTest {
         Customer customer = modelMapper.map(retrievedCustomer, Customer.class);
 
         OrderDTO order1 = OrderDTO.builder()
-                .customerId(customer)
+                .customerId(customer.getRegistrationCode())
                 .submissionDate("09-09-2023")
                 .build();
 
@@ -138,12 +135,12 @@ public class OrderDAOImplTest {
         Customer customer = modelMapper.map(retrievedCustomer, Customer.class);
 
         OrderDTO order1 = OrderDTO.builder()
-                .customerId(customer)
+                .customerId(customer.getRegistrationCode())
                 .submissionDate("2023-09-09")
                 .build();
 
         OrderDTO order2 = OrderDTO.builder()
-                .customerId(customer)
+                .customerId(customer.getRegistrationCode())
                 .submissionDate("2023-09-09")
                 .build();
 
@@ -173,7 +170,7 @@ public class OrderDAOImplTest {
         Customer DBcustomer = modelMapper.map(retrievedCustomer, Customer.class);
 
         OrderDTO order1 = OrderDTO.builder()
-                .customerId(DBcustomer)
+                .customerId(DBcustomer.getRegistrationCode())
                 .submissionDate("09-09-2023")
                 .build();
         orderDAO.saveOrder(order1);
@@ -185,9 +182,9 @@ public class OrderDAOImplTest {
         ProductDTO retrievedProduct = productDAO.getProduct(1);
         Product DBProduct = modelMapper.map(retrievedProduct, Product.class);
 
-        OrderLineDTO orderLineDTO = OrderLineDTO.builder().orderId(DBOrder).productId(DBProduct).quantity(10).build();
+        OrderLineDTO orderLineDTO = OrderLineDTO.builder().orderId(DBOrder.getCustomerId()).productId(DBProduct.getProductId()).quantity(10).build();
         orderLineDAO.saveOrderLine(orderLineDTO);
-        List<OrderDTO> allOrders = orderDAO.getAllOrdersByProduct(DBProduct);
+        List<OrderDTO> allOrders = orderDAO.getAllOrdersByProduct(DBProduct.getProductId());
 
         Assertions.assertThat(allOrders.size()).isEqualTo(1);
     }
@@ -206,19 +203,19 @@ public class OrderDAOImplTest {
         Customer DBcustomer = modelMapper.map(retrievedCustomer, Customer.class);
 
         OrderDTO order1 = OrderDTO.builder()
-                .customerId(DBcustomer)
+                .customerId(DBcustomer.getRegistrationCode())
                 .submissionDate("09-09-2023")
                 .build();
         orderDAO.saveOrder(order1);
 
         OrderDTO order2 = OrderDTO.builder()
-                .customerId(DBcustomer)
+                .customerId(DBcustomer.getRegistrationCode())
                 .submissionDate("09-09-2023")
                 .build();
         orderDAO.saveOrder(order2);
 
 
-        List<OrderDTO> allOrders = orderDAO.getAllOrdersByCustomer(retrievedCustomer);
+        List<OrderDTO> allOrders = orderDAO.getAllOrdersByCustomer(1);
 
         Assertions.assertThat(allOrders.size()).isEqualTo(2);
     }
@@ -236,7 +233,7 @@ public class OrderDAOImplTest {
         Customer DBcustomer = modelMapper.map(retrievedCustomer, Customer.class);
 
         OrderDTO order1 = OrderDTO.builder()
-                .customerId(DBcustomer)
+                .customerId(DBcustomer.getRegistrationCode())
                 .submissionDate("09-09-2023")
                 .build();
         orderDAO.saveOrder(order1);
