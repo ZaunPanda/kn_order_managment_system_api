@@ -1,13 +1,9 @@
 package kn.kn_order_managment_system_api.dao;
 
 import jakarta.transaction.Transactional;
-import kn.kn_order_managment_system_api.dto.CustomerDTO;
-import kn.kn_order_managment_system_api.dto.OrderDTO;
-import kn.kn_order_managment_system_api.dto.OrderLineDTO;
+
 import kn.kn_order_managment_system_api.dto.ProductDTO;
-import kn.kn_order_managment_system_api.entity.Customer;
-import kn.kn_order_managment_system_api.entity.Order;
-import kn.kn_order_managment_system_api.entity.Product;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
