@@ -13,10 +13,12 @@ import java.util.List;
 public class MyRESTProductController {
     @Autowired
     private ProductService productService;
+
     @RequestMapping("/products")
     public List<ProductDTO> showAllProducts() {
         return productService.getAllProducts();
     }
+
     @PostMapping("/products")
     @ResponseStatus(HttpStatus.CREATED)
     public ProductDTO saveProduct(@RequestBody ProductDTO product) {

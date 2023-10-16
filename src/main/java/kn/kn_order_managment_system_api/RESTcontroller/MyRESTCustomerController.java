@@ -13,6 +13,7 @@ import java.util.List;
 public class  MyRESTCustomerController {
     @Autowired
     private CustomerService customerService;
+
     @RequestMapping("/customers")
     public List<CustomerDTO> showAllCustomers() {
         return customerService.getAllCustomers();
@@ -32,6 +33,7 @@ public class  MyRESTCustomerController {
         customerService.saveCustomer(customer);
         return customer;
     }
+
     @DeleteMapping("/customers_delete/{id}")
     public void deleteCustomer(@PathVariable int id) throws Exception {
         customerService.deleteCustomer(id);

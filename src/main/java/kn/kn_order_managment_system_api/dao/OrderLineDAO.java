@@ -7,8 +7,11 @@ import java.util.List;
 
 public interface OrderLineDAO {
     List<OrderLineDTO> getAllOrderLines();
+
     void saveOrderLine(OrderLineDTO orderLineDTO);
+
     OrderLineDTO getOrderLine(int orderLine_id);
+
     void deleteOrderLine(int orderLine_id);
 
 }

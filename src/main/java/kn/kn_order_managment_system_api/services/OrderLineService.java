@@ -7,7 +7,10 @@ import java.util.List;
 
 public interface OrderLineService {
     List<OrderLineDTO> getAllOrderLines();
+
     void saveOrderLine(OrderLineDTO orderLine);
+
     OrderLineDTO getOrderLine(int orderLine_id);
+
     void deleteOrderLine(int orderLine_id);
 }

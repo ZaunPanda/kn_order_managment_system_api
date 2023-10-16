@@ -7,7 +7,10 @@ import java.util.List;
 public interface CustomerDAO {
 
     List<CustomerDTO> getAllCustomers();
+
     Customer saveCustomer(CustomerDTO customer);
+
     CustomerDTO getCustomer(int customer_id) throws Exception;
+
     void deleteCustomer(int customer_id) throws Exception;
 }

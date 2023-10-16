@@ -15,8 +15,10 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
     private int orderId;
+
     @JoinColumn(name = "customer_id")
     private int customerId;
+
     @Column(name = "submission_date")
     private String submissionDate;
 

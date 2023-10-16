@@ -16,10 +16,13 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "registration_code", unique = true)
     private int registrationCode;
+
     @Column(name = "full_name")
     private String fullName;
+
     @Column(name = "email")
     private String email;
+
     @Column(name = "telephone")
     private String telephone;
 

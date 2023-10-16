@@ -15,8 +15,10 @@ public class OrderLine {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "orderline_id")
     private int orderLineId;
+
     @JoinColumn(name = "order_id")
     private int orderId;
+
     @JoinColumn(name = "product_id")
     private int productId;
 

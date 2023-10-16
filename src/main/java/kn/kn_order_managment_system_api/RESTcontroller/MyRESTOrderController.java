@@ -36,6 +36,7 @@ public class MyRESTOrderController {
         orderService.saveOrder(order);
         return order;
     }
+
     @RequestMapping("/orders/by-date/{text_date}")
     public List<OrderDTO> getAllOrdersByDate(@PathVariable String text_date) throws Exception {
         if (text_date == null) {
@@ -46,11 +47,13 @@ public class MyRESTOrderController {
         java.sql.Date sqlStartDate = new java.sql.Date(date.getTime());
         return orderService.getAllOrdersByDate(sqlStartDate);
     }
+
     @RequestMapping("/orders/by-product/{productId}")
     public List<OrderDTO> showAllOrdersByProduct(@PathVariable int productId) {
 
         return orderService.getAllOrdersByProduct(productId);
     }
+
     @RequestMapping("/orders/by-customer/{customerId}")
     public List<OrderDTO> showAllOrdersByCustomer(@PathVariable int customerId) throws Exception {
         if (customerId == 0) {

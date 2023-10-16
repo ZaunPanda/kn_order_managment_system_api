@@ -20,6 +20,7 @@ public class ProductDAOimpl implements ProductDAO {
         List<ProductDTO> allProducts= query.getResultList();
         return allProducts;
     }
+
     @Override
     public void saveProduct(ProductDTO productDTO) {
         Product NewProduct = modelMapper.map(productDTO, Product.class);

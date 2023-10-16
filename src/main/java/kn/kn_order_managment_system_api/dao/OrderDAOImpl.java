@@ -24,6 +24,7 @@ public class OrderDAOImpl implements OrderDAO{
         List<OrderDTO> allOrders= query.getResultList();
         return allOrders;
     }
+
     @Override
     public void saveOrder(OrderDTO orderDTO) {
         Order newOrder = modelMapper.map(orderDTO, Order.class);
