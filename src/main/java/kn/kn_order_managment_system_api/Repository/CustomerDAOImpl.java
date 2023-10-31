@@ -1,8 +1,9 @@
-package kn.kn_order_managment_system_api.dao;
+package kn.kn_order_managment_system_api.Repository;
 
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
+import kn.kn_order_managment_system_api.Repository.interfaces.CustomerDAO;
 import kn.kn_order_managment_system_api.dto.CustomerDTO;
 import kn.kn_order_managment_system_api.entity.Customer;
 import org.modelmapper.ModelMapper;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public class CustomerDAOImpl implements CustomerDAO{
+public class CustomerDAOImpl implements CustomerDAO {
     @PersistenceContext
     private EntityManager entityManager;
 

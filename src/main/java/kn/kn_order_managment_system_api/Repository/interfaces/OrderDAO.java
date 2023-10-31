@@ -1,12 +1,11 @@
-package kn.kn_order_managment_system_api.services;
+package kn.kn_order_managment_system_api.Repository.interfaces;
 
 import kn.kn_order_managment_system_api.dto.OrderDTO;
-
 
 import java.sql.Date;
 import java.util.List;
 
-public interface OrderService {
+public interface OrderDAO {
     List<OrderDTO> getAllOrders();
 
     void saveOrder(OrderDTO order);

@@ -1,9 +1,9 @@
 package kn.kn_order_managment_system_api.RESTController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kn.kn_order_managment_system_api.RESTcontroller.MyRESTProductController;
+import kn.kn_order_managment_system_api.OrderController.MyRESTProductController;
 import kn.kn_order_managment_system_api.dto.ProductDTO;
-import kn.kn_order_managment_system_api.services.ProductService;
+import kn.kn_order_managment_system_api.services.interfaces.ProductService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -33,6 +33,7 @@ public class MyRESTProductControllerTest {
 
     @Autowired
     private ObjectMapper objectMapper;
+
     @Test
     public void MyRESTController_getAllProducts_ReturnAllProducts() throws Exception{
         List<ProductDTO> allProducts = new ArrayList<>();

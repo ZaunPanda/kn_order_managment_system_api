@@ -1,7 +1,8 @@
-package kn.kn_order_managment_system_api.dao;
+package kn.kn_order_managment_system_api.Repository;
 
 import jakarta.persistence.*;
 import jakarta.persistence.Query;
+import kn.kn_order_managment_system_api.Repository.interfaces.OrderLineDAO;
 import kn.kn_order_managment_system_api.dto.OrderLineDTO;
 import kn.kn_order_managment_system_api.entity.OrderLine;
 import org.modelmapper.ModelMapper;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public class OrderLineDAOImpl implements OrderLineDAO{
+public class OrderLineDAOImpl implements OrderLineDAO {
     @Autowired
     private ModelMapper modelMapper;
     @PersistenceContext

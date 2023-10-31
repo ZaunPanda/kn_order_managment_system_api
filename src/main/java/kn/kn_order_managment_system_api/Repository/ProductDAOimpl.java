@@ -1,6 +1,7 @@
-package kn.kn_order_managment_system_api.dao;
+package kn.kn_order_managment_system_api.Repository;
 
 import jakarta.persistence.*;
+import kn.kn_order_managment_system_api.Repository.interfaces.ProductDAO;
 import kn.kn_order_managment_system_api.dto.ProductDTO;
 import kn.kn_order_managment_system_api.entity.Product;
 import org.modelmapper.ModelMapper;

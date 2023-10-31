@@ -1,14 +1,15 @@
 package kn.kn_order_managment_system_api.services;
 
 import jakarta.transaction.Transactional;
-import kn.kn_order_managment_system_api.dao.CustomerDAO;
+import kn.kn_order_managment_system_api.Repository.interfaces.CustomerDAO;
 import kn.kn_order_managment_system_api.dto.CustomerDTO;
+import kn.kn_order_managment_system_api.services.interfaces.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class CustomerServiceImpl implements CustomerService{
+public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private CustomerDAO customerDAO;

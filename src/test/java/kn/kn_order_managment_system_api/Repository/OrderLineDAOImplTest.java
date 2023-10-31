@@ -1,6 +1,10 @@
-package kn.kn_order_managment_system_api.dao;
+package kn.kn_order_managment_system_api.Repository;
 
 import jakarta.transaction.Transactional;
+import kn.kn_order_managment_system_api.Repository.interfaces.CustomerDAO;
+import kn.kn_order_managment_system_api.Repository.interfaces.OrderDAO;
+import kn.kn_order_managment_system_api.Repository.interfaces.OrderLineDAO;
+import kn.kn_order_managment_system_api.Repository.interfaces.ProductDAO;
 import kn.kn_order_managment_system_api.dto.CustomerDTO;
 import kn.kn_order_managment_system_api.dto.OrderDTO;
 import kn.kn_order_managment_system_api.dto.OrderLineDTO;
@@ -17,6 +21,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootTest
@@ -48,7 +54,7 @@ public class OrderLineDAOImplTest {
 
         OrderDTO order1 = OrderDTO.builder()
                 .customerId(DBcustomer.getRegistrationCode())
-                .submissionDate("09-09-2023")
+                .submissionDate(LocalDate.now())
                 .build();
         orderDAO.saveOrder(order1);
         OrderDTO retrievedOrder = orderDAO.getOrder(1);
@@ -83,7 +89,7 @@ public class OrderLineDAOImplTest {
 
         OrderDTO order1 = OrderDTO.builder()
                 .customerId(DBcustomer.getRegistrationCode())
-                .submissionDate("09-09-2023")
+                .submissionDate(LocalDate.now())
                 .build();
         orderDAO.saveOrder(order1);
         OrderDTO retrievedOrder = orderDAO.getOrder(1);
@@ -116,7 +122,7 @@ public class OrderLineDAOImplTest {
 
         OrderDTO order1 = OrderDTO.builder()
                 .customerId(DBcustomer.getRegistrationCode())
-                .submissionDate("09-09-2023")
+                .submissionDate(LocalDate.now())
                 .build();
         orderDAO.saveOrder(order1);
         OrderDTO retrievedOrder = orderDAO.getOrder(1);
@@ -148,7 +154,7 @@ public class OrderLineDAOImplTest {
 
         OrderDTO order1 = OrderDTO.builder()
                 .customerId(DBcustomer.getRegistrationCode())
-                .submissionDate("09-09-2023")
+                .submissionDate(LocalDate.now())
                 .build();
         orderDAO.saveOrder(order1);
         OrderDTO retrievedOrder = orderDAO.getOrder(1);

@@ -2,11 +2,11 @@ package kn.kn_order_managment_system_api.RESTController;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kn.kn_order_managment_system_api.RESTcontroller.MyRESTOrderController;
-import kn.kn_order_managment_system_api.dao.CustomerDAO;
-import kn.kn_order_managment_system_api.dao.OrderDAO;
-import kn.kn_order_managment_system_api.dao.OrderLineDAO;
-import kn.kn_order_managment_system_api.dao.ProductDAO;
+import kn.kn_order_managment_system_api.OrderController.RESTOrderController;
+import kn.kn_order_managment_system_api.Repository.interfaces.CustomerDAO;
+import kn.kn_order_managment_system_api.Repository.interfaces.OrderDAO;
+import kn.kn_order_managment_system_api.Repository.interfaces.OrderLineDAO;
+import kn.kn_order_managment_system_api.Repository.interfaces.ProductDAO;
 import kn.kn_order_managment_system_api.dto.CustomerDTO;
 import kn.kn_order_managment_system_api.dto.OrderDTO;
 import kn.kn_order_managment_system_api.dto.OrderLineDTO;
@@ -14,7 +14,7 @@ import kn.kn_order_managment_system_api.dto.ProductDTO;
 import kn.kn_order_managment_system_api.entity.Customer;
 import kn.kn_order_managment_system_api.entity.Order;
 import kn.kn_order_managment_system_api.entity.Product;
-import kn.kn_order_managment_system_api.services.OrderService;
+import kn.kn_order_managment_system_api.services.interfaces.OrderService;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -35,24 +37,32 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(MyRESTOrderController.class)
-public class MyRESTOrderControllerTest {
+@WebMvcTest(RESTOrderController.class)
+public class RESTOrderControllerTest {
     @Autowired
     private MockMvc mockMvc;
+
     @MockBean
     private OrderDAO orderDAO;
+
     @MockBean
     private CustomerDAO customerDAO;
+
     @MockBean
     private ProductDAO productDAO;
+
     @MockBean
     private OrderLineDAO orderLineDAO;
+
     @MockBean
     private OrderService orderService;
+
     @MockBean
     private ModelMapper modelMapper;
+
     @Autowired
     private ObjectMapper objectMapper;
+
     @Test
     public void MyRESTController_getAllOrders_ReturnAllOrders() throws Exception{
         List<OrderDTO> OrderDTOList = new ArrayList<>();
@@ -69,12 +79,12 @@ public class MyRESTOrderControllerTest {
 
         OrderDTO order1 = OrderDTO.builder()
                 .customerId(1)
-                .submissionDate("09-09-2023")
+                .submissionDate(LocalDate.now())
                 .build();
 
         OrderDTO order2 = OrderDTO.builder()
                 .customerId(1)
-                .submissionDate("10-09-2023")
+                .submissionDate(LocalDate.now())
                 .build();
 
         OrderDTOList.add(order1);
@@ -98,7 +108,7 @@ public class MyRESTOrderControllerTest {
 
         OrderDTO order1 = OrderDTO.builder()
                 .customerId(1)
-                .submissionDate("09-09-2023")
+                .submissionDate(LocalDate.now())
                 .build();
         order1.setOrderId(1);
 
@@ -107,7 +117,7 @@ public class MyRESTOrderControllerTest {
         ResultActions response = mockMvc.perform(get("/api/orders/{id}",1));
         response.andExpect(status().isOk())
                 .andDo(print())
-                .andExpect(jsonPath("$.submissionDate", is("09-09-2023")));
+                .andExpect(jsonPath("$.submissionDate", is(LocalDate.now().toString())));
 
 
     }
@@ -117,7 +127,7 @@ public class MyRESTOrderControllerTest {
 
         OrderDTO order1 = OrderDTO.builder()
                 .customerId(1)
-                .submissionDate("09-09-2023")
+                .submissionDate(LocalDate.now())
                 .build();
         order1.setOrderId(1);
 
@@ -126,7 +136,7 @@ public class MyRESTOrderControllerTest {
         ResultActions response = mockMvc.perform(get("/api/orders/{id}",1));
         response.andExpect(status().isOk())
                 .andDo(print())
-                .andExpect(jsonPath("$.submissionDate", is("09-09-2023")));
+                .andExpect(jsonPath("$.submissionDate", is(LocalDate.now().toString())));
 
 
     }
@@ -147,27 +157,25 @@ public class MyRESTOrderControllerTest {
 
         OrderDTO order1 = OrderDTO.builder()
                 .customerId(1)
-                .submissionDate("2023-09-09")
+                .submissionDate(LocalDate.now())
                 .build();
 
         OrderDTO order2 = OrderDTO.builder()
                 .customerId(1)
-                .submissionDate("2023-09-09")
+                .submissionDate(LocalDate.now())
                 .build();
 
 
         OrderDTOList.add(order1);
         OrderDTOList.add(order2);
 
-        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date date = sdf1.parse("2023-09-09");
-        java.sql.Date sqlStartDate = new java.sql.Date(date.getTime());
+        java.sql.Date sqlStartDate = java.sql.Date.valueOf(LocalDate.now());
 
 
 
         given(orderService.getAllOrdersByDate(sqlStartDate)).willReturn(OrderDTOList);
 
-        ResultActions response = mockMvc.perform(get("/api/orders/by-date/{text_date}","2023-09-09"));
+        ResultActions response = mockMvc.perform(get("/api/orders/by-date/{text_date}",LocalDate.now()));
         response.andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(jsonPath("$.size()",
@@ -189,7 +197,7 @@ public class MyRESTOrderControllerTest {
 
         OrderDTO order1 = OrderDTO.builder()
                 .customerId(1)
-                .submissionDate("09-09-2023")
+                .submissionDate(LocalDate.now())
                 .build();
         orderDAO.saveOrder(order1);
         OrderDTO retrievedOrder = orderDAO.getOrder(1);
@@ -227,12 +235,12 @@ public class MyRESTOrderControllerTest {
 
         OrderDTO order1 = OrderDTO.builder()
                 .customerId(1)
-                .submissionDate("09-09-2023")
+                .submissionDate(LocalDate.now())
                 .build();
 
         OrderDTO order2 = OrderDTO.builder()
                 .customerId(1)
-                .submissionDate("09-09-2023")
+                .submissionDate(LocalDate.now())
                 .build();
 
         allOrdersByCustomer.add(order1);
@@ -254,7 +262,7 @@ public class MyRESTOrderControllerTest {
     public void MyRESTOrderController_deleteOrder_ReturnNothing() throws Exception {
         OrderDTO order1 = OrderDTO.builder()
                 .customerId(1)
-                .submissionDate("09-09-2023")
+                .submissionDate(LocalDate.now())
                 .build();
         order1.setOrderId(1);
 

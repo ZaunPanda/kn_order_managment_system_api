@@ -3,18 +3,21 @@ package kn.kn_order_managment_system_api.dto;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.Instant;
+import java.time.LocalDate;
+
 @Builder
 @Data
 public class OrderDTO {
 
     private int orderId;
     private int customerId;
-    private String submissionDate;
+    private LocalDate submissionDate;
 
     public OrderDTO() {
     }
 
-    public OrderDTO(int orderId, int customerId, String submissionDate) {
+    public OrderDTO(int orderId, int customerId, LocalDate submissionDate) {
         this.orderId = orderId;
         this.customerId = customerId;
         this.submissionDate = submissionDate;
@@ -36,11 +39,11 @@ public class OrderDTO {
         this.customerId = customerId;
     }
 
-    public String getSubmissionDate() {
+    public LocalDate getSubmissionDate() {
         return submissionDate;
     }
 
-    public void setSubmissionDate(String submissionDate) {
+    public void setSubmissionDate(LocalDate submissionDate) {
         this.submissionDate = submissionDate;
     }
 

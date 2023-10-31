@@ -1,24 +1,19 @@
 package kn.kn_order_managment_system_api.RESTController;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import kn.kn_order_managment_system_api.RESTcontroller.MyRESTOrderLineController;
-import kn.kn_order_managment_system_api.dao.CustomerDAO;
-import kn.kn_order_managment_system_api.dao.OrderDAO;
-import kn.kn_order_managment_system_api.dao.OrderLineDAO;
-import kn.kn_order_managment_system_api.dao.ProductDAO;
+import kn.kn_order_managment_system_api.OrderController.MyRESTOrderLineController;
 import kn.kn_order_managment_system_api.dto.OrderDTO;
 import kn.kn_order_managment_system_api.dto.OrderLineDTO;
 import kn.kn_order_managment_system_api.dto.ProductDTO;
-import kn.kn_order_managment_system_api.services.OrderLineService;
-import kn.kn_order_managment_system_api.services.OrderService;
+import kn.kn_order_managment_system_api.services.interfaces.OrderLineService;
 import org.junit.jupiter.api.Test;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,22 +28,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class MyRESTOrderLineControllerTest {
     @Autowired
     private MockMvc mockMvc;
-    @MockBean
-    private OrderDAO orderDAO;
-    @MockBean
-    private CustomerDAO customerDAO;
-    @MockBean
-    private ProductDAO productDAO;
-    @MockBean
-    private OrderLineDAO orderLineDAO;
-    @MockBean
-    private OrderService orderService;
+
     @MockBean
     private OrderLineService orderLineService;
-    @MockBean
-    private ModelMapper modelMapper;
-    @Autowired
-    private ObjectMapper objectMapper;
 
     @Test
     public void MyRESTController_showAllOrderLines_ReturnAllOrderLines() throws Exception{
@@ -56,7 +38,7 @@ public class MyRESTOrderLineControllerTest {
 
         OrderDTO order1 = OrderDTO.builder()
                 .customerId(1)
-                .submissionDate("09-09-2023")
+                .submissionDate(LocalDate.now())
                 .build();
 
         order1.setOrderId(1);

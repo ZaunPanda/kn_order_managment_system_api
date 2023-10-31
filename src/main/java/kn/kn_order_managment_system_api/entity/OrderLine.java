@@ -1,6 +1,7 @@
 package kn.kn_order_managment_system_api.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Digits;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -16,12 +17,15 @@ public class OrderLine {
     @Column(name = "orderline_id")
     private int orderLineId;
 
+    @Digits(message = "Order id support only digits", integer = 30, fraction = 0)
     @JoinColumn(name = "order_id")
     private int orderId;
 
+    @Digits(message = "Product id support only digits", integer = 30, fraction = 0)
     @JoinColumn(name = "product_id")
     private int productId;
 
+    @Digits(message = "Quantity only can be number", integer = 30, fraction = 0)
     @JoinColumn(name = "quantity")
     private int quantity;
 

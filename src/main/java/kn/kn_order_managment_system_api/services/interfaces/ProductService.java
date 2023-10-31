@@ -1,10 +1,10 @@
-package kn.kn_order_managment_system_api.dao;
+package kn.kn_order_managment_system_api.services.interfaces;
 
 import kn.kn_order_managment_system_api.dto.ProductDTO;
 
 import java.util.List;
 
-public interface ProductDAO {
+public interface ProductService {
     List<ProductDTO> getAllProducts();
 
     void saveProduct(ProductDTO productDTO);

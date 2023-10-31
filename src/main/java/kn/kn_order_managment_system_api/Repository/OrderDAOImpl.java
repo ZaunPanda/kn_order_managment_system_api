@@ -1,7 +1,8 @@
-package kn.kn_order_managment_system_api.dao;
+package kn.kn_order_managment_system_api.Repository;
 
 import jakarta.persistence.*;
 
+import kn.kn_order_managment_system_api.Repository.interfaces.OrderDAO;
 import kn.kn_order_managment_system_api.dto.OrderDTO;
 
 import kn.kn_order_managment_system_api.entity.Order;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.Date;
 import java.util.List;
 @Repository
-public class OrderDAOImpl implements OrderDAO{
+public class OrderDAOImpl implements OrderDAO {
     @PersistenceContext
     private EntityManager entityManager;
     @Autowired

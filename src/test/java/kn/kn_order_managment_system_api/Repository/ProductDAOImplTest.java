@@ -1,12 +1,12 @@
-package kn.kn_order_managment_system_api.dao;
+package kn.kn_order_managment_system_api.Repository;
 
 import jakarta.transaction.Transactional;
 
+import kn.kn_order_managment_system_api.Repository.interfaces.ProductDAO;
 import kn.kn_order_managment_system_api.dto.ProductDTO;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -21,15 +21,8 @@ import java.util.List;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class ProductDAOImplTest {
     @Autowired
-    private OrderDAO orderDAO;
-    @Autowired
-    private CustomerDAO customerDAO;
-    @Autowired
     private ProductDAO productDAO;
-    @Autowired
-    private OrderLineDAO orderLineDAO;
-    @Autowired
-    private ModelMapper modelMapper;
+
     @Test
     public void ProductDAO_getAllProducts_ReturnAllProducts(){
 
@@ -48,6 +41,7 @@ public class ProductDAOImplTest {
         ProductDTO product1 = ProductDTO.builder().productName("Tea").skuCode("EU883311").unitPrice("12").build();
         productDAO.saveProduct(product1);
         ProductDTO retrievedProduct = productDAO.getProduct(1);
+
         Assertions.assertThat(product1.getSkuCode()).isEqualTo(retrievedProduct.getSkuCode());
     }
     @Test
@@ -56,6 +50,7 @@ public class ProductDAOImplTest {
         ProductDTO product1 = ProductDTO.builder().productName("Tea").skuCode("EU883311").unitPrice("12").build();
         productDAO.saveProduct(product1);
         ProductDTO retrievedProduct = productDAO.getProduct(1);
+
         Assertions.assertThat(retrievedProduct).isNotNull();
     }
     @Test
@@ -65,6 +60,7 @@ public class ProductDAOImplTest {
         productDAO.saveProduct(product1);
         productDAO.deleteProduct(1);
         ProductDTO retrievedProduct = productDAO.getProduct(1);
+
         Assertions.assertThat(retrievedProduct).isNull();
     }
 

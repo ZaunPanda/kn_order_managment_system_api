@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class KnOrderManagmentSystemApiApplication {
+public class KnOrderManagementSystemApiApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(KnOrderManagmentSystemApiApplication.class, args);
+        SpringApplication.run(KnOrderManagementSystemApiApplication.class, args);
     }
 
 }

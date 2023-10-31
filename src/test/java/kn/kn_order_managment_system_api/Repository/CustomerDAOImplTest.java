@@ -1,6 +1,7 @@
-package kn.kn_order_managment_system_api.dao;
+package kn.kn_order_managment_system_api.Repository;
 
 import jakarta.transaction.Transactional;
+import kn.kn_order_managment_system_api.Repository.interfaces.CustomerDAO;
 import kn.kn_order_managment_system_api.dto.CustomerDTO;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

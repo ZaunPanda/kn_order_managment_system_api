@@ -1,6 +1,10 @@
 package kn.kn_order_managment_system_api.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -17,12 +21,16 @@ public class Customer {
     @Column(name = "registration_code", unique = true)
     private int registrationCode;
 
+    @NotEmpty(message = "Full name cannot be empty")
+    @Size(max = 100, message = "Full name can be up to 100 characters")
     @Column(name = "full_name")
     private String fullName;
 
+    @Email(message = "Invalid email address")
     @Column(name = "email")
     private String email;
 
+    @Pattern(regexp = "^[0-9]{10}$", message = "Invalid telephone number")
     @Column(name = "telephone")
     private String telephone;
 

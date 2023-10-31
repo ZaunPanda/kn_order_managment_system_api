@@ -9,12 +9,12 @@ public class ProductDTO {
     private int productId;
     private String productName;
     private String skuCode;
-    private String unitPrice;
+    private Integer unitPrice;
 
     public ProductDTO() {
     }
 
-    public ProductDTO(int productId, String productName, String skuCode, String unitPrice) {
+    public ProductDTO(int productId, String productName, String skuCode, Integer unitPrice) {
         this.productId = productId;
         this.productName = productName;
         this.skuCode = skuCode;
@@ -45,11 +45,11 @@ public class ProductDTO {
         this.skuCode = skuCode;
     }
 
-    public String getUnitPrice() {
+    public Integer getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(String unitPrice) {
+    public void setUnitPrice(Integer unitPrice) {
         this.unitPrice = unitPrice;
     }
 }

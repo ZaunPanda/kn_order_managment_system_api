@@ -1,4 +1,4 @@
-package kn.kn_order_managment_system_api.services;
+package kn.kn_order_managment_system_api.services.interfaces;
 
 import kn.kn_order_managment_system_api.dto.CustomerDTO;
 

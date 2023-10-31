@@ -1,15 +1,16 @@
 package kn.kn_order_managment_system_api.services;
 
 import jakarta.transaction.Transactional;
-import kn.kn_order_managment_system_api.dao.ProductDAO;
+import kn.kn_order_managment_system_api.Repository.interfaces.ProductDAO;
 import kn.kn_order_managment_system_api.dto.ProductDTO;
+import kn.kn_order_managment_system_api.services.interfaces.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductDAO productDAO;
