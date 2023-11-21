@@ -27,8 +27,8 @@ public class ProductDAOImplTest {
     public void ProductDAO_getAllProducts_ReturnAllProducts(){
 
 
-        ProductDTO product1 = ProductDTO.builder().productName("Tea").skuCode("EU883311").unitPrice("12").build();
-        ProductDTO product2 = ProductDTO.builder().productName("Coffee").skuCode("EU812311").unitPrice("6").build();
+        ProductDTO product1 = ProductDTO.builder().productName("Tea").skuCode("EU883311").unitPrice(12).build();
+        ProductDTO product2 = ProductDTO.builder().productName("Coffee").skuCode("EU812311").unitPrice(6).build();
         productDAO.saveProduct(product1);
         productDAO.saveProduct(product2);
         List<ProductDTO> allProducts = productDAO.getAllProducts();
@@ -38,7 +38,7 @@ public class ProductDAOImplTest {
     @Test
     public void ProductDAO_saveProduct_ReturnSavedProduct() {
 
-        ProductDTO product1 = ProductDTO.builder().productName("Tea").skuCode("EU883311").unitPrice("12").build();
+        ProductDTO product1 = ProductDTO.builder().productName("Tea").skuCode("EU883311").unitPrice(12).build();
         productDAO.saveProduct(product1);
         ProductDTO retrievedProduct = productDAO.getProduct(1);
 
@@ -47,7 +47,7 @@ public class ProductDAOImplTest {
     @Test
     public void ProductDAO_getProduct_ReturnProduct() {
 
-        ProductDTO product1 = ProductDTO.builder().productName("Tea").skuCode("EU883311").unitPrice("12").build();
+        ProductDTO product1 = ProductDTO.builder().productName("Tea").skuCode("EU883311").unitPrice(12).build();
         productDAO.saveProduct(product1);
         ProductDTO retrievedProduct = productDAO.getProduct(1);
 
@@ -56,7 +56,7 @@ public class ProductDAOImplTest {
     @Test
     public void ProductDAO_deleteProduct_ReturnNull() {
 
-        ProductDTO product1 = ProductDTO.builder().productName("Tea").skuCode("EU883311").unitPrice("12").build();
+        ProductDTO product1 = ProductDTO.builder().productName("Tea").skuCode("EU883311").unitPrice(12).build();
         productDAO.saveProduct(product1);
         productDAO.deleteProduct(1);
         ProductDTO retrievedProduct = productDAO.getProduct(1);

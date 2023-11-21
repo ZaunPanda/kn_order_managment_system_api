@@ -1,8 +1,12 @@
 package kn.kn_order_managment_system_api.OrderController;
 import jakarta.validation.Valid;
+import kn.kn_order_managment_system_api.OrderController.models.CustomerSearchCriteria;
+import kn.kn_order_managment_system_api.OrderController.models.CustomerSpecifications;
 import kn.kn_order_managment_system_api.dto.CustomerDTO;
+import kn.kn_order_managment_system_api.entity.Customer;
 import kn.kn_order_managment_system_api.services.interfaces.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,5 +39,10 @@ public class RESTCustomerController {
     @DeleteMapping("/customers_delete/{id}")
     public void deleteCustomer(@PathVariable(required = true) int id) throws Exception {
         customerService.deleteCustomer(id);
+    }
+    @GetMapping("/customers/search")
+    public List<CustomerDTO> searchCustomers(@RequestBody CustomerSearchCriteria criteria) throws Exception {
+        Specification <Customer> specification = CustomerSpecifications.buildSpecification(criteria);
+        return customerService.findAll(specification);
     }
 }

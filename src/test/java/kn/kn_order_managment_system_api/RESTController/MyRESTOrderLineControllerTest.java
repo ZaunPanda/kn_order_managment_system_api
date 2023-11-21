@@ -42,9 +42,9 @@ public class MyRESTOrderLineControllerTest {
                 .build();
 
         order1.setOrderId(1);
-        ProductDTO product1 = ProductDTO.builder().productName("Tea").skuCode("EU883311").unitPrice("12").build();
+        ProductDTO product1 = ProductDTO.builder().productName("Tea").skuCode("EU883311").unitPrice(12).build();
         product1.setProductId(1);
-        ProductDTO product2 = ProductDTO.builder().productName("Coffee").skuCode("EU812311").unitPrice("6").build();
+        ProductDTO product2 = ProductDTO.builder().productName("Coffee").skuCode("EU812311").unitPrice(6).build();
         product2.setProductId(2);
 
         OrderLineDTO orderLineDTO = OrderLineDTO.builder().orderId(order1.getOrderId()).productId(product1.getProductId()).quantity(10).build();

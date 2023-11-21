@@ -183,7 +183,7 @@ public class OrderDAOImplTest {
         OrderDTO retrievedOrder = orderDAO.getOrder(1);
         Order DBOrder = modelMapper.map(retrievedOrder, Order.class);
 
-        ProductDTO product1 = ProductDTO.builder().productName("Tea").skuCode("EU883311").unitPrice("12").build();
+        ProductDTO product1 = ProductDTO.builder().productName("Tea").skuCode("EU883311").unitPrice(12).build();
         productDAO.saveProduct(product1);
         ProductDTO retrievedProduct = productDAO.getProduct(1);
         Product DBProduct = modelMapper.map(retrievedProduct, Product.class);

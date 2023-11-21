@@ -38,9 +38,9 @@ public class MyRESTProductControllerTest {
     public void MyRESTController_getAllProducts_ReturnAllProducts() throws Exception{
         List<ProductDTO> allProducts = new ArrayList<>();
 
-        ProductDTO product1 = ProductDTO.builder().productName("Tea").skuCode("EU883311").unitPrice("12").build();
+        ProductDTO product1 = ProductDTO.builder().productName("Tea").skuCode("EU883311").unitPrice(12).build();
         product1.setProductId(1);
-        ProductDTO product2 = ProductDTO.builder().productName("Coffee").skuCode("EU812311").unitPrice("6").build();
+        ProductDTO product2 = ProductDTO.builder().productName("Coffee").skuCode("EU812311").unitPrice(6).build();
         product2.setProductId(2);
 
 
@@ -62,7 +62,7 @@ public class MyRESTProductControllerTest {
     @Test
     public void MyRESTController_saveProduct_ReturnOk() throws Exception{
 
-        ProductDTO product1 = ProductDTO.builder().productName("Tea").skuCode("EU883311").unitPrice("12").build();
+        ProductDTO product1 = ProductDTO.builder().productName("Tea").skuCode("EU883311").unitPrice(12).build();
         product1.setProductId(1);
 
         mockMvc.perform(post("/api/products")
