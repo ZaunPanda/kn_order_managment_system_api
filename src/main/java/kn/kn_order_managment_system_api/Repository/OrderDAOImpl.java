@@ -2,13 +2,19 @@ package kn.kn_order_managment_system_api.Repository;
 
 import jakarta.persistence.*;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import kn.kn_order_managment_system_api.Repository.interfaces.OrderDAO;
+import kn.kn_order_managment_system_api.dto.CustomerDTO;
 import kn.kn_order_managment_system_api.dto.OrderDTO;
 
+import kn.kn_order_managment_system_api.entity.Customer;
 import kn.kn_order_managment_system_api.entity.Order;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
@@ -45,28 +51,26 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
-    public List<OrderDTO> getAllOrdersByDate(Date date) {
-        Query query = entityManager.createQuery("from Order where submissionDate=:date");
-        query.setParameter("date", date.toString());
-        List<OrderDTO> allOrdersByDate= query.getResultList();
-        return allOrdersByDate;
-    }
+    public List<OrderDTO> findAll(Specification specification) {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<OrderDTO> query = builder.createQuery(OrderDTO.class);
+        Root<Order> root = query.from(Order.class);
 
-    @Override
-    public List<OrderDTO> getAllOrdersByProduct(int productId) {
-        Query query = entityManager.createQuery("SELECT orderId FROM OrderLine WHERE productId = :product");
-        query.setParameter("product", productId);
-        List<OrderDTO> allOrdersByProduct = query.getResultList();
+        // Применяем спецификацию к CriteriaQuery
+        query.where(specification.toPredicate(root, query, builder));
 
-        return allOrdersByProduct;
-    }
+        // Проектируем результат в CustomerDTO
+        query.select(builder.construct(
+                OrderDTO.class,
+                root.get("orderId"),
+                root.get("customerId"),
+                root.get("submissionDate")
+        ));
 
-    @Override
-    public List<OrderDTO> getAllOrdersByCustomer(int customerId) {
-        Query query = entityManager.createQuery("FROM Order WHERE customerId = :customer");
-        query.setParameter("customer", customerId);
-        List<OrderDTO> allOrdersByCustomer = query.getResultList();
-        return allOrdersByCustomer;
+        List<OrderDTO> result = entityManager.createQuery(query)
+                .getResultList();
+
+        return result;
     }
 
     @Override

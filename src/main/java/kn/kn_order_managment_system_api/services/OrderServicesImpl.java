@@ -5,6 +5,7 @@ import kn.kn_order_managment_system_api.Repository.interfaces.OrderDAO;
 import kn.kn_order_managment_system_api.dto.OrderDTO;
 import kn.kn_order_managment_system_api.services.interfaces.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -34,22 +35,8 @@ public class OrderServicesImpl implements OrderService {
     }
 
     @Override
-    @Transactional
-    public List<OrderDTO> getAllOrdersByDate(Date date) {
-        return orderDAO.getAllOrdersByDate(date);
-    }
-
-    @Override
-    @Transactional
-    public List<OrderDTO> getAllOrdersByProduct(int productId) {
-
-        return orderDAO.getAllOrdersByProduct(productId);
-    }
-
-    @Override
-    @Transactional
-    public List<OrderDTO> getAllOrdersByCustomer(int customerId) {
-        return orderDAO.getAllOrdersByCustomer(customerId);
+    public List<OrderDTO> findAll(Specification cs) throws Exception {
+        return orderDAO.findAll(cs);
     }
 
     @Override

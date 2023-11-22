@@ -1,9 +1,17 @@
 package kn.kn_order_managment_system_api.OrderController;
 
+import kn.kn_order_managment_system_api.OrderController.models.CustomerSearchCriteria;
+import kn.kn_order_managment_system_api.OrderController.models.CustomerSpecifications;
+import kn.kn_order_managment_system_api.OrderController.models.OrderSearchCriteria;
+import kn.kn_order_managment_system_api.OrderController.models.OrderSpecifications;
+import kn.kn_order_managment_system_api.dto.CustomerDTO;
 import kn.kn_order_managment_system_api.dto.OrderDTO;
 
+import kn.kn_order_managment_system_api.entity.Customer;
+import kn.kn_order_managment_system_api.entity.Order;
 import kn.kn_order_managment_system_api.services.interfaces.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,31 +44,10 @@ public class RESTOrderController {
         orderService.saveOrder(order);
         return order;
     }
-
-
-    @GetMapping("/orders/by-date/{text_date}")
-    public List<OrderDTO> getAllOrdersByDate(@PathVariable String text_date) throws Exception {
-        if (text_date == null) {
-            throw new IllegalArgumentException("Date is missing");
-        }
-        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date date = sdf1.parse(text_date);
-        java.sql.Date sqlStartDate = new java.sql.Date(date.getTime());
-        return orderService.getAllOrdersByDate(sqlStartDate);
-    }
-
-    @GetMapping("/orders/by-product/{productId}")
-    public List<OrderDTO> showAllOrdersByProduct(@PathVariable int productId) {
-
-        return orderService.getAllOrdersByProduct(productId);
-    }
-
-    @GetMapping("/orders/by-customer/{customerId}")
-    public List<OrderDTO> showAllOrdersByCustomer(@PathVariable int customerId) throws Exception {
-        if (customerId == 0) {
-            throw new Exception("Add valid registartion code");
-        }
-        return orderService.getAllOrdersByCustomer(customerId);
+    @GetMapping("/orders/search")
+    public List<OrderDTO> searchCustomers(@RequestBody OrderSearchCriteria criteria) throws Exception {
+        Specification<Order> specification = OrderSpecifications.buildSpecification(criteria);
+        return orderService.findAll(specification);
     }
 
     @DeleteMapping("/orders/delete/{orderId}")
