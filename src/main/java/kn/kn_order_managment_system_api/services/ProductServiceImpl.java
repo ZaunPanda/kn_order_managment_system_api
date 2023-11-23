@@ -5,6 +5,7 @@ import kn.kn_order_managment_system_api.Repository.interfaces.ProductDAO;
 import kn.kn_order_managment_system_api.dto.ProductDTO;
 import kn.kn_order_managment_system_api.services.interfaces.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,6 +32,12 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public ProductDTO getProduct(int product_id) {
         return productDAO.getProduct(product_id);
+    }
+
+    @Override
+    @Transactional
+    public List<ProductDTO> findAll(Specification cs) throws Exception {
+        return productDAO.findAll(cs);
     }
 
     @Override
