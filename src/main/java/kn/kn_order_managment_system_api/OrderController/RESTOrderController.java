@@ -1,23 +1,14 @@
 package kn.kn_order_managment_system_api.OrderController;
 
-import kn.kn_order_managment_system_api.OrderController.models.CustomerSearchCriteria;
-import kn.kn_order_managment_system_api.OrderController.models.CustomerSpecifications;
 import kn.kn_order_managment_system_api.OrderController.models.OrderSearchCriteria;
 import kn.kn_order_managment_system_api.OrderController.models.OrderSpecifications;
-import kn.kn_order_managment_system_api.dto.CustomerDTO;
 import kn.kn_order_managment_system_api.dto.OrderDTO;
-
-import kn.kn_order_managment_system_api.entity.Customer;
 import kn.kn_order_managment_system_api.entity.Order;
 import kn.kn_order_managment_system_api.services.interfaces.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.util.List;
 
