@@ -31,7 +31,7 @@ public class OrderLineSpecifications {
     private static Specification<OrderLine> buildLikeSpecification(String searchCriteria, String field) {
         return (root, query, builder) -> {
             Path<String> path = root.get(field);
-            return builder.like(path, "%" + searchCriteria + "%");
+            return builder.like(path, "" + searchCriteria + "");
         };
 }
 }

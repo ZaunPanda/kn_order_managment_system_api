@@ -50,7 +50,7 @@ public class OrderLineDAOImpl implements OrderLineDAO {
     public List<OrderLineDTO> findAll(Specification specification) {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<OrderLineDTO> query = builder.createQuery(OrderLineDTO.class);
-        Root<Order> root = query.from(Order.class);
+        Root<OrderLine> root = query.from(OrderLine.class);
 
         query.where(specification.toPredicate(root, query, builder));
 
