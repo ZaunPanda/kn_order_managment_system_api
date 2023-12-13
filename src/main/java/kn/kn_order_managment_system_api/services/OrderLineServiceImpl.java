@@ -2,9 +2,11 @@ package kn.kn_order_managment_system_api.services;
 
 import jakarta.transaction.Transactional;
 import kn.kn_order_managment_system_api.Repository.interfaces.OrderLineDAO;
+import kn.kn_order_managment_system_api.dto.OrderDTO;
 import kn.kn_order_managment_system_api.dto.OrderLineDTO;
 import kn.kn_order_managment_system_api.services.interfaces.OrderLineService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,6 +32,11 @@ public class OrderLineServiceImpl implements OrderLineService {
     @Transactional
     public OrderLineDTO getOrderLine(int orderLine_id) {
         return orderLineDAO.getOrderLine(orderLine_id);
+    }
+
+    @Override
+    public List<OrderLineDTO> findAll(Specification cs) throws Exception {
+        return orderLineDAO.findAll(cs);
     }
 
     @Override
