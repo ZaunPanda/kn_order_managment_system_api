@@ -55,10 +55,8 @@ public class CustomerDAOImpl implements CustomerDAO {
         CriteriaQuery<CustomerDTO> query = builder.createQuery(CustomerDTO.class);
         Root<Customer> root = query.from(Customer.class);
 
-        // Применяем спецификацию к CriteriaQuery
         query.where(specification.toPredicate(root, query, builder));
 
-        // Проектируем результат в CustomerDTO
         query.select(builder.construct(
                 CustomerDTO.class,
                 root.get("registrationCode"),

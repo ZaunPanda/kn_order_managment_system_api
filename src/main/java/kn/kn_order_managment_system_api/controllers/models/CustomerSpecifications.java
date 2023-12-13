@@ -1,4 +1,4 @@
-package kn.kn_order_managment_system_api.OrderController.models;
+package kn.kn_order_managment_system_api.controllers.models;
 
 import jakarta.persistence.criteria.Path;
 import kn.kn_order_managment_system_api.entity.Customer;

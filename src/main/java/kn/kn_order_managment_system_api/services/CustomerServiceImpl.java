@@ -1,10 +1,8 @@
 package kn.kn_order_managment_system_api.services;
 
 import jakarta.transaction.Transactional;
-import kn.kn_order_managment_system_api.OrderController.models.CustomerSpecifications;
 import kn.kn_order_managment_system_api.Repository.interfaces.CustomerDAO;
 import kn.kn_order_managment_system_api.dto.CustomerDTO;
-import kn.kn_order_managment_system_api.entity.Customer;
 import kn.kn_order_managment_system_api.services.interfaces.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;

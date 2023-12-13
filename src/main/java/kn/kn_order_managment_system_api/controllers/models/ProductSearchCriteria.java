@@ -1,4 +1,4 @@
-package kn.kn_order_managment_system_api.OrderController.models;
+package kn.kn_order_managment_system_api.controllers.models;
 
 public class ProductSearchCriteria {
     private String productId;

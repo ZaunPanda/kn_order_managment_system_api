@@ -10,6 +10,7 @@ import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.TestPropertySource;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ import java.util.List;
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 @Transactional
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@TestPropertySource(locations = "classpath:application-test.properties")
 public class CustomerDAOImplTest {
     @Autowired
     private CustomerDAO customerDAO;
@@ -27,13 +29,13 @@ public class CustomerDAOImplTest {
         CustomerDTO customer1 = CustomerDTO.builder()
                 .fullName("CustomerOne")
                 .email("email@email.com")
-                .telephone("+37255667744")
+                .telephone("1234567890")
                 .build();
 
         CustomerDTO customer2 = CustomerDTO.builder()
                 .fullName("CustomerTwo")
                 .email("email2@email.com")
-                .telephone("+372000000")
+                .telephone("1234567890")
                 .build();
 
         customerDAO.saveCustomer(customer1);
@@ -49,8 +51,10 @@ public class CustomerDAOImplTest {
         CustomerDTO customer = CustomerDTO.builder()
                 .fullName("CustomerSaveCustomer")
                 .email("email@email.com")
-                .telephone("+37255667744")
+                .telephone("1234567890")
                 .build();
+
+        System.out.println();
 
         customerDAO.saveCustomer(customer);
 
@@ -63,7 +67,7 @@ public class CustomerDAOImplTest {
         CustomerDTO customer = CustomerDTO.builder()
                 .fullName("CustomerGetCustomer")
                 .email("email@email.com")
-                .telephone("+37255667744")
+                .telephone("1234567890")
                 .build();
 
         customerDAO.saveCustomer(customer);
@@ -78,7 +82,7 @@ public class CustomerDAOImplTest {
         CustomerDTO customer = CustomerDTO.builder()
                 .fullName("CustomerOne")
                 .email("email@email.com")
-                .telephone("+37255667744")
+                .telephone("1234567890")
                 .build();
 
         customerDAO.saveCustomer(customer);

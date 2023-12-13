@@ -3,7 +3,7 @@ package kn.kn_order_managment_system_api.RESTController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import kn.kn_order_managment_system_api.OrderController.RESTCustomerController;
+import kn.kn_order_managment_system_api.controllers.CustomerController;
 import kn.kn_order_managment_system_api.dto.CustomerDTO;
 import kn.kn_order_managment_system_api.services.interfaces.CustomerService;
 import org.junit.jupiter.api.Test;
@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.mockito.BDDMockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
-@WebMvcTest(RESTCustomerController.class)
+@WebMvcTest(CustomerController.class)
 public class CustomerControllerTest {
     @Autowired
     private MockMvc mockMvc;
@@ -41,12 +41,12 @@ public class CustomerControllerTest {
         CustomerDTO customerDTO1 = CustomerDTO.builder()
                 .email("email@email.com")
                 .fullName("TestCustomer")
-                .telephone("+37266445533").build();
+                .telephone("1234567890").build();
         customerDTO1.setRegistrationCode(1);
         CustomerDTO customerDTO2 = CustomerDTO.builder()
                 .email("email@email.com")
                 .fullName("TestCustomer")
-                .telephone("+37266445533").build();
+                .telephone("1234567890").build();
         customerDTO2.setRegistrationCode(2);
         customerDTOList.add(customerDTO1);
         customerDTOList.add(customerDTO2);
@@ -65,7 +65,7 @@ public class CustomerControllerTest {
         CustomerDTO customerDTO1 = CustomerDTO.builder()
                 .email("email@email.com")
                 .fullName("TestCustomer")
-                .telephone("+37266445533").build();
+                .telephone("1234567890").build();
         customerDTO1.setRegistrationCode(1);
         given(customerService.getCustomer(customerDTO1.getRegistrationCode()))
                 .willReturn(customerDTO1);
@@ -80,7 +80,7 @@ public class CustomerControllerTest {
         CustomerDTO customerDTO1 = CustomerDTO.builder()
                 .email("email@email.com")
                 .fullName("TestCustomer")
-                .telephone("+37266445533").build();
+                .telephone("1234567890").build();
         customerDTO1.setRegistrationCode(1);
 
         mockMvc.perform(post("/api/customers")
@@ -95,7 +95,7 @@ public class CustomerControllerTest {
         CustomerDTO customerDTO1 = CustomerDTO.builder()
                 .email("email@email.com")
                 .fullName("TestCustomer")
-                .telephone("+37266445533").build();
+                .telephone("1234567890").build();
         customerDTO1.setRegistrationCode(1);
 
         ResultActions response = mockMvc.perform(post("/api/customers")

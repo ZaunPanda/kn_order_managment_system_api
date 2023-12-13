@@ -1,4 +1,4 @@
-package kn.kn_order_managment_system_api.OrderController.exceptions;
+package kn.kn_order_managment_system_api.controllers.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;

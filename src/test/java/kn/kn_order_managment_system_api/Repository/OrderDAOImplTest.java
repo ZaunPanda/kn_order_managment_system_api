@@ -7,11 +7,7 @@ import kn.kn_order_managment_system_api.Repository.interfaces.OrderLineDAO;
 import kn.kn_order_managment_system_api.Repository.interfaces.ProductDAO;
 import kn.kn_order_managment_system_api.dto.CustomerDTO;
 import kn.kn_order_managment_system_api.dto.OrderDTO;
-import kn.kn_order_managment_system_api.dto.OrderLineDTO;
-import kn.kn_order_managment_system_api.dto.ProductDTO;
 import kn.kn_order_managment_system_api.entity.Customer;
-import kn.kn_order_managment_system_api.entity.Order;
-import kn.kn_order_managment_system_api.entity.Product;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
@@ -20,9 +16,8 @@ import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.TestPropertySource;
 
-import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -30,6 +25,7 @@ import java.util.List;
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 @Transactional
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@TestPropertySource(locations = "classpath:application-test.properties")
 public class OrderDAOImplTest {
     @Autowired
     private OrderDAO orderDAO;
@@ -47,7 +43,7 @@ public class OrderDAOImplTest {
         Customer customer1 = Customer.builder()
                 .fullName("CustomerOne")
                 .email("email@email.com")
-                .telephone("+37255667744")
+                .telephone("1234567890")
                 .build();
 
         CustomerDTO customerDTO = modelMapper.map(customer1, CustomerDTO.class);
@@ -79,7 +75,7 @@ public class OrderDAOImplTest {
         Customer customer1 = Customer.builder()
                 .fullName("CustomerOne")
                 .email("email@email.com")
-                .telephone("+37255667744")
+                .telephone("1234567890")
                 .build();
 
         CustomerDTO customerDTO = modelMapper.map(customer1, CustomerDTO.class);
@@ -105,7 +101,7 @@ public class OrderDAOImplTest {
         Customer customer1 = Customer.builder()
                 .fullName("CustomerOne")
                 .email("email@email.com")
-                .telephone("+37255667744")
+                .telephone("1234567890")
                 .build();
 
         CustomerDTO customerDTO = modelMapper.map(customer1, CustomerDTO.class);
@@ -132,7 +128,7 @@ public class OrderDAOImplTest {
         Customer customer1 = Customer.builder()
                 .fullName("CustomerOne")
                 .email("email@email.com")
-                .telephone("+37255667744")
+                .telephone("1234567890")
                 .build();
         CustomerDTO customerDTO = modelMapper.map(customer1, CustomerDTO.class);
         customerDAO.saveCustomer(customerDTO);

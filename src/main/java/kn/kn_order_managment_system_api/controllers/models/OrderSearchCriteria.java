@@ -1,8 +1,6 @@
-package kn.kn_order_managment_system_api.OrderController.models;
+package kn.kn_order_managment_system_api.controllers.models;
 
-    import java.time.LocalDate;
-
-    public class OrderSearchCriteria {
+public class OrderSearchCriteria {
         private String orderId;
         private String customerId;
         private String submissionDate;

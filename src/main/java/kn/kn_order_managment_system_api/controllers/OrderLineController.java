@@ -1,4 +1,4 @@
-package kn.kn_order_managment_system_api.OrderController;
+package kn.kn_order_managment_system_api.controllers;
 
 import kn.kn_order_managment_system_api.dto.OrderLineDTO;
 
@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class MyRESTOrderLineController {
+public class OrderLineController {
     @Autowired
     private OrderLineService orderLineService;
 

@@ -1,7 +1,7 @@
-package kn.kn_order_managment_system_api.OrderController;
+package kn.kn_order_managment_system_api.controllers;
 import jakarta.validation.Valid;
-import kn.kn_order_managment_system_api.OrderController.models.CustomerSearchCriteria;
-import kn.kn_order_managment_system_api.OrderController.models.CustomerSpecifications;
+import kn.kn_order_managment_system_api.controllers.models.CustomerSearchCriteria;
+import kn.kn_order_managment_system_api.controllers.models.CustomerSpecifications;
 import kn.kn_order_managment_system_api.dto.CustomerDTO;
 import kn.kn_order_managment_system_api.entity.Customer;
 import kn.kn_order_managment_system_api.services.interfaces.CustomerService;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class RESTCustomerController {
+public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
