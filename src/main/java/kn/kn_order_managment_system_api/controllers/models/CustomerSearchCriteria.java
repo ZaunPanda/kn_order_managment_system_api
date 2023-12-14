@@ -1,19 +1,15 @@
 package kn.kn_order_managment_system_api.controllers.models;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
 public class CustomerSearchCriteria {
 
     private String fullName;
     private String email;
     private String telephone;
-
-    public CustomerSearchCriteria() {
-    }
-
-    public CustomerSearchCriteria(String fullName, String email, String telephone) {
-        this.fullName = fullName;
-        this.email = email;
-        this.telephone = telephone;
-    }
 
     public String getFullName() {
         return fullName;

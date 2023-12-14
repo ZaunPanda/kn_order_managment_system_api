@@ -1,27 +1,22 @@
 package kn.kn_order_managment_system_api.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 import java.time.LocalDate;
 
 @Builder
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class OrderDTO {
 
     private int orderId;
     private int customerId;
     private LocalDate submissionDate;
-
-    public OrderDTO() {
-    }
-
-    public OrderDTO(int orderId, int customerId, LocalDate submissionDate) {
-        this.orderId = orderId;
-        this.customerId = customerId;
-        this.submissionDate = submissionDate;
-    }
 
     public int getOrderId() {
         return orderId;

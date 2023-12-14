@@ -1,20 +1,15 @@
 package kn.kn_order_managment_system_api.OrderController.models;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
 public class OrderLineSearchCriteria {
     private String orderLineId;
     private String orderId;
     private String productId;
     private String quantity;
-
-    public OrderLineSearchCriteria() {
-    }
-
-    public OrderLineSearchCriteria(String orderLineId, String orderId, String productId, String quantity) {
-        this.orderLineId = orderLineId;
-        this.orderId = orderId;
-        this.productId = productId;
-        this.quantity = quantity;
-    }
 
     public String getOrderLineId() {
         return orderLineId;

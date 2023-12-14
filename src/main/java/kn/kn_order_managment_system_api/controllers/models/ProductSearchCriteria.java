@@ -1,20 +1,15 @@
 package kn.kn_order_managment_system_api.controllers.models;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductSearchCriteria {
     private String productId;
     private String productName;
     private String skuCode;
     private String unitPrice;
-
-    public ProductSearchCriteria() {
-    }
-
-    public ProductSearchCriteria(String productId, String productName, String skuCode, String unitPrice) {
-                this.productId = productId;
-        this.productName = productName;
-        this.skuCode = skuCode;
-        this.unitPrice = unitPrice;
-    }
 
     public String getProductId() {
         return productId;

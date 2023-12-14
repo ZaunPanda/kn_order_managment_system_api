@@ -1,25 +1,19 @@
 package kn.kn_order_managment_system_api.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Builder
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class OrderLineDTO {
     private int orderLineId;
     private int orderId;
     private int productId;
     private int quantity;
-
-    public OrderLineDTO() {
-    }
-
-    public OrderLineDTO(int orderLineId, int orderId, int productId, int quantity) {
-        this.orderLineId = orderLineId;
-        this.orderId = orderId;
-        this.productId = productId;
-        this.quantity = quantity;
-    }
 
     public int getOrderLineId() {
         return orderLineId;

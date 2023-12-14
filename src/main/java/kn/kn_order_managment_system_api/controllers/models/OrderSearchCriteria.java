@@ -1,20 +1,16 @@
 package kn.kn_order_managment_system_api.controllers.models;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
 public class OrderSearchCriteria {
         private String orderId;
         private String customerId;
         private String submissionDate;
 
-        public OrderSearchCriteria() {
-        }
-
-        public OrderSearchCriteria(String orderId, String customerId, String submissionDate) {
-            this.orderId = orderId;
-                this.customerId = customerId;
-            this.submissionDate = submissionDate;
-        }
-
-        public String getOrderId() {
+    public String getOrderId() {
             return orderId;
         }
 
