@@ -20,11 +20,11 @@ services:
       MYSQL_USER: bestuser
       MYSQL_PASSWORD: bestuser
     ports:
-      - "3307:3307"
+      - "8082:8082"
 #  adminer_container:
 #    image: adminer:latest
 #    environment:
 #      ADMINER_DEFAULT_SERVER: kn_springproject_db
 #      ADMINER_DESIGN: galkaev
 #    ports:
-#      - "3333:3333"
+#      - "8080:8080"

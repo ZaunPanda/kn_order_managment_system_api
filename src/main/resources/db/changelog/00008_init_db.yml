@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: V1_1
+      id: V1_2
       author: juri_albreht
       objectQuotingStrategy: LEGACY
       comment: initialization for creating all tables
@@ -10,5 +10,5 @@ databaseChangeLog:
         - sqlFile:
             dbms: mysql
             encoding: UTF-8
-            path: 00001_init_db.sql
+            path: 00008_init_db.sql
             relativeToChangelogFile: true
