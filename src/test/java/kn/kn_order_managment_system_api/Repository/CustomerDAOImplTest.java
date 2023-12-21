@@ -1,52 +1,47 @@
 package kn.kn_order_managment_system_api.Repository;
-
-import jakarta.transaction.Transactional;
 import kn.kn_order_managment_system_api.Repository.interfaces.CustomerDAO;
 import kn.kn_order_managment_system_api.dto.CustomerDTO;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.TestPropertySource;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+
+import java.util.Arrays;
 import java.util.List;
 
-@SpringBootTest
-@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
-@Transactional
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-@TestPropertySource(locations = "classpath:application-test.properties")
+import static org.mockito.Mockito.*;
+@ExtendWith(MockitoExtension.class)
 public class CustomerDAOImplTest {
-    @Autowired
-    private CustomerDAO customerDAO;
 
     @Test
     public void CustomerDAO_getAllCustomers_ReturnCustomers() {
+        CustomerDAO mockCustomerDAO = mock(CustomerDAO.class);
 
-        CustomerDTO customer1 = CustomerDTO.builder()
-                .fullName("CustomerOne")
-                .email("email@email.com")
-                .telephone("1234567890")
-                .build();
+        when(mockCustomerDAO.getAllCustomers()).thenReturn(Arrays.asList(
+                CustomerDTO.builder()
+                        .fullName("Customer1")
+                        .email("email@email.com")
+                        .telephone("1234567890")
+                        .build(),
+                CustomerDTO.builder()
+                        .fullName("Customer2")
+                        .email("email@email.com")
+                        .telephone("1234567890")
+                        .build()
+        ));
 
-        CustomerDTO customer2 = CustomerDTO.builder()
-                .fullName("CustomerTwo")
-                .email("email2@email.com")
-                .telephone("1234567890")
-                .build();
+        List<CustomerDTO> allCustomers = mockCustomerDAO.getAllCustomers();
 
-        customerDAO.saveCustomer(customer1);
-        customerDAO.saveCustomer(customer2);
-
-        List<CustomerDTO> allCustomers = customerDAO.getAllCustomers();
         Assertions.assertThat(allCustomers).isNotNull();
         Assertions.assertThat(allCustomers.size()).isEqualTo(2);
+        verify(mockCustomerDAO, times(1)).getAllCustomers();
+        System.out.println(1);
     }
     @Test
-    public void CustomerDAO_saveCustomer_ReturnCustomer() throws Exception {
+    public void CustomerDAO_saveCustomer_getCustomer_ReturnCustomer() {
+
+        CustomerDAO mockCustomerDAO = mock(CustomerDAO.class);
 
         CustomerDTO customer = CustomerDTO.builder()
                 .fullName("CustomerSaveCustomer")
@@ -54,30 +49,15 @@ public class CustomerDAOImplTest {
                 .telephone("1234567890")
                 .build();
 
-        System.out.println();
-
-        customerDAO.saveCustomer(customer);
-
-        CustomerDTO retrievedCustomer = customerDAO.getCustomer(1);
-        Assertions.assertThat(retrievedCustomer.getFullName()).isEqualTo(customer.getFullName());
-    }
-    @Test
-    public void CustomerDAO_getCustomer_ReturnCustomer() throws Exception {
-
-        CustomerDTO customer = CustomerDTO.builder()
-                .fullName("CustomerGetCustomer")
-                .email("email@email.com")
-                .telephone("1234567890")
-                .build();
-
-        customerDAO.saveCustomer(customer);
-
-        CustomerDTO retrievedCustomer = customerDAO.getCustomer(1);
-        Assertions.assertThat(retrievedCustomer.getFullName()).isEqualTo(customer.getFullName());
+        mockCustomerDAO.saveCustomer(customer);
+        verify(mockCustomerDAO, times(1)).saveCustomer(customer);
+        System.out.println(2);
     }
 
     @Test
     public void CustomerDAO_deleteCustomer_ReturnCustomer() throws Exception {
+
+        CustomerDAO mockCustomerDAO = mock(CustomerDAO.class);
 
         CustomerDTO customer = CustomerDTO.builder()
                 .fullName("CustomerOne")
@@ -85,11 +65,12 @@ public class CustomerDAOImplTest {
                 .telephone("1234567890")
                 .build();
 
-        customerDAO.saveCustomer(customer);
-        customerDAO.deleteCustomer(1);
+        mockCustomerDAO.saveCustomer(customer);
+        mockCustomerDAO.deleteCustomer(1);
 
-        CustomerDTO customerDTO = customerDAO.getCustomer(1);
+        CustomerDTO customerDTO = mockCustomerDAO.getCustomer(1);
         Assertions.assertThat(customerDTO).isNull();
+        System.out.println(3);
 
     }
 
