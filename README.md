@@ -12,6 +12,8 @@ How to build base CRUD application -
 
 **Database:** MySQL
 
+**Container:** Docker
+
 **Tests:** jUnit
 
 <summary><b>Structure:</b></summary>
