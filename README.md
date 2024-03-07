@@ -16,9 +16,9 @@ How to build base CRUD application -
 
 **Tests:** jUnit
 
-<summary><b>Structure:</b></summary>
 
-<details>
+
+
 <summary><b>Structure:</b></summary>
 
 * services\
@@ -39,4 +39,4 @@ How to build base CRUD application -
       Contains dao tests
     * **RESTcontroller** \
       Contains RESTcontroller tests
-</details>
+
