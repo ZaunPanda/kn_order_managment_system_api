@@ -10,7 +10,7 @@ How to build base CRUD application -
 
 **Framework :** Spring boot
 
-**Database:** MySQL
+**Database:** SQL
 
 **Container:** Docker
 
